@@ -3,16 +3,15 @@ import "./App.css";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Navbar from "./components/Navbar/Navbar";
-import { getProducts } from "./api";
 import { useDispatch } from "react-redux";
-import { addProducts } from "./redux/productSlice";
+import { addProductsFromDB } from "./redux/productSlice";
 export const SHOP_NAME = "clothing shop"
 function App() {
   
   const dispatch = useDispatch()
   const init = async() => {
     
-    dispatch(addProducts(await getProducts()));
+    dispatch(addProductsFromDB());
   }
 
   init()

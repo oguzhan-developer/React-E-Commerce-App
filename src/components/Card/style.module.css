@@ -1,15 +1,7 @@
 #Card {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.item{
-    margin: 1rem;
-}
-
-.item img{
-    width: 20rem;
-}
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: max-content;
+  }

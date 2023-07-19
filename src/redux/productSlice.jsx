@@ -1,15 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
- const productSlice = createSlice({
+const BASE_URL = "http://localhost:3004/products";
+
+export const addProductsFromDB = createAsyncThunk("addProductsFromDB", async () => {
+  const response = await fetch(BASE_URL);
+  return await response.json();
+});
+
+const productSlice = createSlice({
   name: "products",
-  initialState: { items: [] },
-  reducers: {
-    addProducts: (state, action) => {
-        state.items = action.payload
-        console.log(state.items);
-    }
+  initialState: {
+    items: [],
+    api: {
+      isLoading: false,
+      error:null
+    },
+  },
+  reducers: {},
+  extraReducers(builder) {
+
+    builder.addCase(addProductsFromDB.pending, (state) => {
+      state.api.isLoading = true;
+    })
+
+    .addCase(addProductsFromDB.rejected, (state, action) => {
+      state.api.error = `${action.error.name} ${action.error.message}`
+      state.api.isLoading = false;
+    })
+
+    .addCase(addProductsFromDB.fulfilled, (state, action) => {
+      state.items = action.payload;
+      state.api.isLoading = false;
+      state.api.error = null;
+    })
   },
 });
-export const useProducts = state => state.product.items;
-export const {addProducts} = productSlice.actions;
+export const useIsLoading = state => state.product.api.isLoading
+export const useProducts = (state) => state.product.items;
+export const { addProducts } = productSlice.actions;
 export default productSlice.reducer;

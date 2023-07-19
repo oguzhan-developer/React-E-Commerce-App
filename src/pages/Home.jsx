@@ -5,8 +5,8 @@ function Home() {
 
   return (
     <div>
-      <Button variant="contained">Tikla</Button>
-      <Card/>
+{/*       <Button variant="contained">Tikla</Button>
+ */}      <Card/>
     </div>
   );
 }
