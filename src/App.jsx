@@ -10,7 +10,6 @@ function App() {
   
   const dispatch = useDispatch()
   const init = async() => {
-    
     dispatch(addProductsFromDB());
   }
 
