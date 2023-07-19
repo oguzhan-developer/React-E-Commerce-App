@@ -1,0 +1,10 @@
+{
+  "products": [
+      {
+          "id": 1,
+          "title": "Foldsack Backpack",
+          "price": 109.95,
+          "image": "foldsack-backpack"
+      }
+  ]
+}

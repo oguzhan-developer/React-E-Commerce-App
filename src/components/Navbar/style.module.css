@@ -1,0 +1,22 @@
+#Navbar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #5c5959;
+    background: beige;
+    color: brown;
+}
+
+#Input{
+    text-align: center;
+    width: 18rem;
+}
+
+.icon{
+    height: 2rem !important;
+    width: 2rem !important;
+}
