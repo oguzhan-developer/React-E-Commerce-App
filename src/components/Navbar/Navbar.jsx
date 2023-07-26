@@ -9,7 +9,7 @@ function Navbar() {
   const navigator = useNavigate();
   return (
     <div id={Styles.Navbar}>
-      <h2 onClick={() => navigator("/")} style={{cursor:"pointer"}}>{SHOP_NAME}</h2>
+      <h2 id={Styles.Shop_name} onClick={() => navigator("/")}>{SHOP_NAME}</h2>
 
       <div>
       <Input id={Styles.Input}>search for products</Input>

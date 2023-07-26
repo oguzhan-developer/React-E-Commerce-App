@@ -1,0 +1,83 @@
+.item {
+  opacity: 1;
+  margin: 1rem;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.button {
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem !important;
+  width: 50%;
+}
+.image {
+  border-radius: 15px;
+  padding-right: 2rem;
+}
+
+#Span_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#Category {
+  padding-right: 0.8rem;
+}
+
+.label {
+  margin: 0.3rem;
+  text-wrap: wrap;
+  width: 16rem;
+}
+
+#Div_bottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  padding: 0.2rem;
+}
+
+#Rating {
+  padding: 0.2rem;
+  display: inline;
+}
+
+#Stars {
+  padding-right: 0.5rem;
+}
+
+.togglebtn {
+  padding: 0.7rem !important;
+  font-size: 1rem !important;
+}
+
+#Customize {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#Size_area {
+  margin-right: 2rem;
+  border-radius: 50px;
+}
+
+#ShippingTypes {
+  width: 15rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#Price{
+  font-size: large;
+  font-weight: 500;
+  margin: 0.3rem 0;
+}

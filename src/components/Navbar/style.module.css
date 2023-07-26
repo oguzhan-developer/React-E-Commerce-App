@@ -11,10 +11,19 @@
     color: brown;
 }
 
+#Shop_name{
+    cursor: pointer;
+}
+#Shop_name:hover{
+    opacity: 0.94;
+}
+
 #Input{
     text-align: center;
     width: 18rem;
 }
+
+
 
 .icon{
     height: 2rem !important;

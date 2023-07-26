@@ -2,11 +2,8 @@ import React from "react";
 import Styles from "./style.module.css";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setDetailItem } from "../../../redux/productSlice";
 function Item({ product }) {
   const navigator = useNavigate();
-  const dispatch = useDispatch();
 
   const navigateToDetailPage = () => {
     navigator(`/detail/${product.id}`);
@@ -22,7 +19,7 @@ function Item({ product }) {
       <strong className={Styles.label} onClick={() => navigateToDetailPage()}>
         {product.title}
       </strong>
-      <label className={Styles.label}>{product.price}$</label>
+      <label className={Styles.label}><strong>$</strong>{product.price}</label>
       <Button className={Styles.button} variant="contained">
         add to basket
       </Button>
