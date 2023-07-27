@@ -1,6 +1,31 @@
 {
-  "products":
-  [
+  "users": [
+    {
+      "email": "ali@gmail.com",
+      "password": "$2a$10$FLrbk6lr6pSDxu8WGoJ0.OrJRVqmCUjdd0ZncOnytvoRy7wqOrROe",
+      "id": "46QLVQ2YNZchE-PLxuinc",
+      "username": "ali"
+    },
+    {
+      "email": "al2i@gmail.com",
+      "password": "$2a$10$35NyNIIURTjmUJOc0TOQw.zp3vsvr50IRbfltBY5r5y0Jyoa.qKhe",
+      "id": "jnfCRG0Vly15SoB9lO5xS",
+      "username": "ali"
+    },
+    {
+      "email": "al24i@gmail.com",
+      "password": "$2a$10$svE5uYwEuxZbwn6CMzIUlOHBzdYxab/BmWzlvEAdfHcVYocj3CREi",
+      "id": "oyDuuDx50SUjitNWHt9j1",
+      "username": "Oğuzhan YALÇIN"
+    },
+    {
+      "email": "als24i@gmail.com",
+      "password": "$2a$10$0tKxQcJq5iAWNpilYzmhzOH2VwOSHEDpAwQ0dAd3VZgVhraJm9kuK",
+      "id": "9HrWueD6BNk_tDNzpWTaJ",
+      "username": "Oğuzhan YALÇIN"
+    }
+  ],
+  "products": [
     {
       "id": 1,
       "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",

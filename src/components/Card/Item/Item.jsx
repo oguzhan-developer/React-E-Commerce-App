@@ -1,7 +1,7 @@
 import React from "react";
 import Styles from "./style.module.css";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 function Item({ product }) {
   const navigator = useNavigate();
 
@@ -13,8 +13,9 @@ function Item({ product }) {
     <div className={Styles.item}>
       <img
         className={Styles.image}
-        src={`https://picsum.photos/id/${product.id}/300/380`}
-        onClick={() => navigateToDetailPage()}
+        src={product.image}
+/*         src={`https://picsum.photos/id/${product.id}/300/380`}
+ */        onClick={() => navigateToDetailPage()}
       />
       <strong className={Styles.label} onClick={() => navigateToDetailPage()}>
         {product.title}

@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const BASE_URL = "http://localhost:3004/products/";
-const pageLenght = 5;
+const pageLenght = 9;
 
 export const addProductsFromDB = createAsyncThunk(
   "addProductsFromDB",
   async (page) => {
-    const response = await fetch(
-      `${BASE_URL}?_page=${page}&_limit=${pageLenght}`
+    const response = await axios(
+      `${BASE_URL}?_page=${page}&_limit=${pageLenght}`,{withCredentials:true}
     );
-    return await response.json();
+    return await response.data;
   }
 );
 
@@ -48,6 +49,7 @@ const productSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    
     //Add Products From DB
     builder
       .addCase(addProductsFromDB.pending, (state) => {

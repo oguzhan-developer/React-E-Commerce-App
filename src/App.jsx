@@ -5,9 +5,9 @@ import Detail from "./pages/Detail";
 import Navbar from "./components/Navbar/Navbar";
 import { useDispatch, useSelector} from "react-redux";
 import { addProductsFromDB, usePage} from "./redux/productSlice";
-import SignIn from "./pages/Auth/SignIn";
-import SignUp from "./pages/Auth/SignUp";
 import { useEffect } from "react";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="detail/:id" element={<Detail />} />
       </Routes>
     </div>
