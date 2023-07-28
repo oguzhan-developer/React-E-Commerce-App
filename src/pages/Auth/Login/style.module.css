@@ -1,0 +1,13 @@
+#Login{
+    display: flex;
+    justify-content: center;
+}
+
+#Card{
+    width: 18rem;
+}
+
+#btn_login{
+    width: 8rem;
+    margin: 0 auto;
+}

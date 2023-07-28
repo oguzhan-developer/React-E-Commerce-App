@@ -1,14 +1,15 @@
 .item {
+  width: 18rem;
+  height: 21rem;
+  margin: 0.4rem;
   opacity: 1;
-  margin: 1rem;
-  padding: 1rem;
-  padding-bottom: 0rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /*   border-radius: 15px;
+ */
   cursor: pointer;
 }
 
@@ -21,17 +22,26 @@
 
 .button {
   opacity: 0;
-  margin-top: 0.2rem;
-  margin-bottom: 0.5rem !important;
+  width: 97%;
+  margin: 0 !important;
 }
 .image {
-  border-radius: 15px;
-  width: 20rem;
-  height: 20rem;
+  padding-top: 0.3rem;
+  width: 13rem;
+  height: 13rem;
 }
 
 .label {
   margin: 0.3rem;
   text-wrap: wrap;
   width: 16rem;
+}
+
+.label_price {
+  font-size: large;
+  /*   margin: 0.3rem;
+ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

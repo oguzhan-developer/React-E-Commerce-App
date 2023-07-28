@@ -13,14 +13,20 @@ import {
   Switch,
   ToggleButton,
   ToggleButtonGroup,
+  Typography,
 } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
-import { IconButton } from "@mui/joy";
+import { Alert, IconButton, LinearProgress } from "@mui/joy";
 import { FavoriteBorder, FavoriteSharp } from "@mui/icons-material";
+import RatingSection from "../../Utilities/RatingSection";
+
 function Detail() {
   const [size, setSize] = useState("S");
   const [fastShipping, setFastShipping] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const [alert, setAlert] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
@@ -83,58 +89,84 @@ function Detail() {
 
   const favoriteBtn = () => {
     return (
-      <IconButton onClick={() => setFavorite(!favorite)}>
+      <IconButton
+        onClick={() => {
+          setFavorite(!favorite);
+          setAlert(true);
+        }}
+      >
         {favorite && <FavoriteSharp />}
         {!favorite && <FavoriteBorder />}
       </IconButton>
     );
   };
 
-  const ratingSection = () => {
-    return (
-      <span id={Styles.Rating}>
-        <strong>{product.rating.rate}</strong>
-        <Rating
-          id={Styles.Stars}
-          name="read-only"
-          value={product.rating.rate}
-          size="medium"
-          precision={0.5}
-          readOnly
-        />
-        <>{`${product.rating.count} people rated.`}</>
-      </span>
-    );
+  const favoriteAlert = () => {
+    if (alert) {
+      setTimeout(() => setAlert(false), 1000);
+      return (
+        <Alert
+          sx={{ alignItems: "flex-start" }}
+          startDecorator={React.cloneElement(<CheckCircleIcon />, {
+            sx: { mt: "2px", mx: "4px" },
+            fontSize: "xl2",
+          })}
+          variant="soft"
+          color="success"
+          endDecorator={
+            <IconButton variant="soft" size="sm" color="success">
+              <CloseRoundedIcon onClick={() => setAlert(false)} />
+            </IconButton>
+          }
+        >
+          <div>
+            <Typography fontWeight="lg" mt={0.25}>
+              {"Favorited."}
+            </Typography>
+          </div>
+        </Alert>
+      );
+    }
   };
+
 
   if (product)
     return (
-      <div className={Styles.item}>
-        <div>
-          <img className={Styles.image} src={product.image} />
-        </div>
-        <div>
-          <span id={Styles.Span_title}>
-            <strong name="title" className={Styles.label}>{product.title}</strong>
-            <span name="category" id={Styles.Category}>{product.category}</span>
-          </span>
-          <p>{product.description}</p>
-          <div name="price" id={Styles.Price}>{product.price}$</div>
-
-          <div id={Styles.Customize}>
-            {sizeSection()}
-            {shippingSection()}
+      <>
+        <div className={Styles.item}>
+          <div>
+            <img className={Styles.image} src={product.image} />
           </div>
-
-          <div id={Styles.Div_bottom}>
-            <div id={Styles.div_btn_favorite}>
-              {addToBasketBtn()}
-              {favoriteBtn()}
+          <div>
+            <span id={Styles.Span_title}>
+              <strong name="title" className={Styles.label}>
+                {product.title}
+              </strong>
+              <span name="category" id={Styles.Category}>
+                {product.category}
+              </span>
+            </span>
+            <p>{product.description}</p>
+            <div name="price" id={Styles.Price}>
+              {product.price}$
             </div>
-            {ratingSection()}
+
+            <div id={Styles.Customize}>
+              {sizeSection()}
+              {shippingSection()}
+            </div>
+
+            <div id={Styles.Div_bottom}>
+              <div id={Styles.div_btn_favorite}>
+                {addToBasketBtn()}
+                {favoriteBtn()}
+              </div>
+              <RatingSection product={product} size="medium"/>
+            </div>
           </div>
         </div>
-      </div>
+        {favoriteAlert()}
+      </>
     );
 }
 

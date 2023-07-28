@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:3004/products/";
-const pageLenght = 9;
+const pageLenght = 12;
 
 export const addProductsFromDB = createAsyncThunk(
   "addProductsFromDB",

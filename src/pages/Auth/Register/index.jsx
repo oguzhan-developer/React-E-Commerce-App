@@ -11,26 +11,25 @@ import {
   TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/joy";
+import { Button, Input } from "@mui/joy";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser, useRegisterIsLoading } from "../../../redux/userSlice";
+import InputField from "../../../Utilities/InputField";
 
 const defaultForm = { name: "", email: "", password: "" };
 function Register() {
-  const [loading, setLoading] = useState(false);
+  const isLoading = useSelector(useRegisterIsLoading)
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState(defaultForm);
-  const navigator = useNavigate();
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleBtn = () => {
+  const handleBtn = (e) => {
+    e.preventDefault()
+    dispatch(registerUser(form))
     setForm(defaultForm);
-    setLoading(true);
-    setTimeout(()=>setLoading(false),1000)
-    setTimeout(() => {
-      setLoading(false);
-      navigator("/");
-    }, 1200);
   };
 
   return (
@@ -39,39 +38,39 @@ function Register() {
         <br />
         <Card id={Styles.Card} variant="outlined">
           <h4>Register and Don't miss out on discounts!</h4>
-
-          <TextField
-            id={Styles.Input_name}
-            label="name"
+          <form onSubmit={handleBtn}>
+            <label>name</label>
+          <InputField 
             name="name"
             value={form.name}
-            type="text"
-            variant="outlined"
             onChange={handleChange}
-          />
+            required = {true} />
           <br />
-          <TextField
-            id={Styles.Input_name}
-            label="email"
+
+          <label>email</label>
+          <InputField
             name="email"
             value={form.email}
-            type="text"
-            variant="outlined"
             onChange={handleChange}
+            required = {true}
           />
           <br />
+          <label>password</label>
+
           <PasswordField
+            name="password"
             showPassword={showPassword}
             setShowPassword={setShowPassword}
-            name="password"
             value={form.password}
             onChange={handleChange}
+            required = {true}
           />
           <br />
 
-          <Button onClick={handleBtn} loading={loading} variant="solid">
+          <Button loading={isLoading} variant="solid" type="submit">
             Register
           </Button>
+          </form>
           <br />
         </Card>
       </div>

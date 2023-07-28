@@ -1,15 +1,7 @@
-import React from "react";
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Input } from "@mui/joy";
+import React from "react";
 
-function PasswordField({
+function InputField({
   id,
   placeholder,
   label,
@@ -17,26 +9,15 @@ function PasswordField({
   value,
   onChange,
   required,
-  setShowPassword,
-  showPassword
 }) {
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)};
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-
   return (
     <Input
-      id={id}
+    id={id}
       placeholder={placeholder}
       label={label}
       name={name}
       value={value}
-      type={showPassword ? 'text' : 'password'}
+      type="text"
       variant="soft"
       onChange={onChange}
       required={required}
@@ -60,21 +41,11 @@ function PasswordField({
         "&:focus-within::before": {
           transform: "scaleX(1)",
         },
+        
       }}
-      endDecorator={
-        <InputAdornment position="end">
-        <IconButton
-          aria-label="toggle password visibility"
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-          edge="end"
-        >
-          {showPassword ? <Visibility /> : <VisibilityOff />}
-        </IconButton>
-      </InputAdornment>
-      }
+
     />
   );
 }
 
-export default PasswordField;
+export default InputField;
