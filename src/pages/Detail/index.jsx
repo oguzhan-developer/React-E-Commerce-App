@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import {
   getProductById,
   resetDetailItem,
+  useDetailError,
+  useDetailIsLoading,
   useDetailProduct,
 } from "../../redux/productSlice";
 import Styles from "./style.module.css";
@@ -21,6 +23,8 @@ import { useState } from "react";
 import { Alert, IconButton, LinearProgress } from "@mui/joy";
 import { FavoriteBorder, FavoriteSharp } from "@mui/icons-material";
 import RatingSection from "../../Utilities/RatingSection";
+import Error404 from "../Error404";
+import Loading from "../../components/Loading";
 
 function Detail() {
   const [size, setSize] = useState("S");
@@ -30,7 +34,7 @@ function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
-
+  const loading = useSelector(useDetailIsLoading);
   useEffect(() => {
     dispatch(resetDetailItem());
     dispatch(getProductById(id));
@@ -129,8 +133,9 @@ function Detail() {
     }
   };
 
-
-  if (product)
+  if(loading) return <Loading />
+  else{
+    if (product && Object.keys(product).length > 0)
     return (
       <>
         <div className={Styles.item}>
@@ -161,13 +166,18 @@ function Detail() {
                 {addToBasketBtn()}
                 {favoriteBtn()}
               </div>
-              <RatingSection product={product} size="medium"/>
+              <RatingSection product={product} size="medium" />
             </div>
           </div>
         </div>
         {favoriteAlert()}
       </>
     );
+  else if (!product || Object.keys(product).length == 0)
+    return <Error404 message={"product not found"} />;
+  }
+    
+  
 }
 
 export default Detail;

@@ -15,7 +15,7 @@ export const addProductsFromDB = createAsyncThunk(
 );
 
 export const getProductById = createAsyncThunk("getProductById", async (id) => {
-  const response = await fetch(`${BASE_URL}/${id}`);
+  const response = await fetch(`${BASE_URL}${id}`);
   return await response.json();
 });
 
@@ -78,6 +78,7 @@ const productSlice = createSlice({
       .addCase(getProductById.rejected, (state, action) => {
         state.detailItem.error = `${action.error.name} ${action.error.message}`;
         state.detailItem.isLoading = false;
+        state.detailItem.item = null
       })
 
       .addCase(getProductById.fulfilled, (state, action) => {
@@ -90,6 +91,8 @@ const productSlice = createSlice({
 export const usePage = (state) => state.product.page.index;
 export const useIsLastPage = (state) => state.product.page.isLastPage;
 export const useDetailProduct = (state) => state.product.detailItem.item;
+export const useDetailError = state => state.product.detailItem.error;
+export const useDetailIsLoading = state => state.product.detailItem.isLoading;  
 export const useIsLoading = (state) => state.product.api.isLoading;
 export const useProducts = (state) => state.product.items;
 export const { setDetailItem, resetDetailItem, nextPage } =

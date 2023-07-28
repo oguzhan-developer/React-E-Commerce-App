@@ -1,16 +1,17 @@
 import { Button } from "@mui/joy";
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "../../components/Card";
 import Styles from "./style.module.css";
-import { nextPage, useIsLastPage } from "../../redux/productSlice";
+import { nextPage, useIsLastPage, useIsLoading } from "../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { nanoid } from "@reduxjs/toolkit";
-import jwtDecode from "jwt-decode";
+import Loading from "../../components/Loading";
 
 function Home() {
   const dispatch = useDispatch();
   const isLastPage = useSelector(useIsLastPage);
+  const isLoading = useSelector(useIsLoading);
+
+  if (isLoading) return  <Loading />;
   return (
     <div id={Styles.Home}>
       

@@ -7,8 +7,7 @@ import Loading from "../Loading";
 
 function Card() {
   const products = useSelector(useProducts);
-  const isLoading = useSelector(useIsLoading);
-  if (isLoading) return  <Loading />;
+  
 
   return (
     <div id={Styles.Card}>

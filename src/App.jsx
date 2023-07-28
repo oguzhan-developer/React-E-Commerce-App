@@ -9,11 +9,11 @@ import { useEffect } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import { getUserByToken, resetUser } from "./redux/userSlice";
+import Error404 from "./pages/Error404";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
   const page = useSelector(usePage);
-
 
   useEffect(() => {
     init();
@@ -30,7 +30,6 @@ function App() {
 
   const init = () => {
     dispatch(addProductsFromDB(page));
-    console.log("added products from db.");
   };
 
   return (
@@ -41,6 +40,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="detail/:id" element={<Detail />} />
+        <Route path="*" element={<Error404 message={"Page not Found"} />} />
       </Routes>
     </div>
   );
