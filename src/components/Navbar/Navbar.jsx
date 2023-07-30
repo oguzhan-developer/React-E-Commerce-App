@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <div id={Styles.Navbar}>
       <h2 id={Styles.Shop_name} onClick={() => navigator("/")}>
-        {SHOP_NAME}
+        {import.meta.env.VITE_SITE_NAME}
       </h2>
 
       <div>

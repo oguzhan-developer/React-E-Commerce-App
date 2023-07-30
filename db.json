@@ -100,6 +100,12 @@
       "password": "$2a$10$j6PKkF90FVnVaFeAzwZzn.V7DNcS0cRjudGQYPI6xxsAaLK6SFNmm",
       "id": "cIimKKJ8c1aMB8_Scj5b9",
       "name": "turan"
+    },
+    {
+      "email": "ahmet@gmail.com",
+      "password": "$2a$10$eBolsFtw3XRI0HiNLPSyh.kb8ZyAH8gc6kpDdIJrjk4uQCr7.mzX2",
+      "id": "x0AdBOkWJulfiKOq_bfiE",
+      "name": "ahmet"
     }
   ],
   "products": [

@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-const BASE_URL = "http://localhost:3004";
+const BASE_URL = import.meta.env.VITE_BASE_ENDPOINT;
+const DB_USER = import.meta.env.VITE_DB_USER;
 export const registerUser = createAsyncThunk("registerUser", async (user) => {
-  const response = await axios.post(BASE_URL, {
+  const response = await axios.post(`${BASE_URL}/register`, {
     id: nanoid(),
     name: user.name,
     email: user.email,
@@ -21,12 +22,15 @@ export const loginUser = createAsyncThunk("loginUser", async (user) => {
   return response.data;
 });
 
-export const getUserByToken = createAsyncThunk("getUserByToken", async(userToken) => {
-  const decodedUser = jwtDecode(userToken);
-  const id = decodedUser.sub
-  const response = await axios(`${BASE_URL}/users/${id}`)
-  return response.data
-})
+export const getUserByToken = createAsyncThunk(
+  "getUserByToken",
+  async (userToken) => {
+    const decodedUser = jwtDecode(userToken);
+    const id = decodedUser.sub;
+    const response = await axios(`${BASE_URL}${DB_USER}${id}`);
+    return response.data;
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -92,18 +96,16 @@ const userSlice = createSlice({
       .addCase(getUserByToken.rejected, (state, action) => {
         state.getUser.isLoading = false;
         state.getUser.error = `${action.error.name} ${action.error.message}`;
-        state.user = null; //expired acces token 
+        state.user = null; //expired acces token
       })
       .addCase(getUserByToken.fulfilled, (state, action) => {
         state.getUser.isLoading = false;
         state.getUser.error = null;
-        state.user = action.payload
+        state.user = action.payload;
       });
-
-
   },
 });
-export const useUser = state => state.user.user;
+export const useUser = (state) => state.user.user;
 export const useRegisterIsLoading = (state) => state.user.register.isLoading;
 export const { resetUser, setUser } = userSlice.actions;
 export default userSlice.reducer;
