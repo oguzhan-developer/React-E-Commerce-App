@@ -16,7 +16,7 @@ export const addProductsFromDB = createAsyncThunk(
 );
 
 export const getProductById = createAsyncThunk("getProductById", async (id) => {
-  const response = await fetch(`${BASE_ENDPOINT}${DB_PRODUCT}${id}`);
+  const response = await fetch(`${BASE_ENDPOINT}${DB_PRODUCT}/${id}`);
   return await response.json();
 });
 
