@@ -13,14 +13,14 @@ function Home() {
 
   if (isLoading) return  <Loading />;
   return (
-    <div id={Styles.Home}>
+    <div id={Styles.home}>
       
       <Card />
       <br />
       {!isLastPage && (
-        <Button onClick={() => dispatch(nextPage())}>Load more</Button>
+        <Button onClick={() => dispatch(nextPage())}>Daha fazla</Button>
       )}
-      {isLastPage && <h4>you are on the last page</h4>}
+      {isLastPage && <h4>Son sayfadasınız.</h4>}
     </div>
   );
 }

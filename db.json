@@ -1,111 +1,30 @@
 {
   "users": [
     {
-      "email": "ali@gmail.com",
-      "password": "$2a$10$FLrbk6lr6pSDxu8WGoJ0.OrJRVqmCUjdd0ZncOnytvoRy7wqOrROe",
-      "id": "46QLVQ2YNZchE-PLxuinc",
-      "username": "ali"
-    },
+      "email": "oguzhan@gmail.com",
+      "password": "$2a$10$R5ZCV3aQq7t.pAcRJ.yEyOU0ugXFEDHUbOx4TIjrIhwAJ0zdOflcq",
+      "id": "L1IP24SKvCsjp1UjBwYcQ",
+      "name": "Oğuzhan",
+      "favorites": []
+    }
+  ],
+  "favorites": [
     {
-      "email": "al2i@gmail.com",
-      "password": "$2a$10$35NyNIIURTjmUJOc0TOQw.zp3vsvr50IRbfltBY5r5y0Jyoa.qKhe",
-      "id": "jnfCRG0Vly15SoB9lO5xS",
-      "username": "ali"
-    },
-    {
-      "email": "al24i@gmail.com",
-      "password": "$2a$10$svE5uYwEuxZbwn6CMzIUlOHBzdYxab/BmWzlvEAdfHcVYocj3CREi",
-      "id": "oyDuuDx50SUjitNWHt9j1",
-      "username": "Oğuzhan YALÇIN"
-    },
-    {
-      "email": "als24i@gmail.com",
-      "password": "$2a$10$0tKxQcJq5iAWNpilYzmhzOH2VwOSHEDpAwQ0dAd3VZgVhraJm9kuK",
-      "id": "9HrWueD6BNk_tDNzpWTaJ",
-      "username": "Oğuzhan YALÇIN"
-    },
-    {
-      "email": "asddas@gmail.com",
-      "password": "$2a$10$QLSq2P.ON3IUOScyP4JA9OQz.0RUNrI2dahCjFAJZhahWWG2Qtoj6",
-      "id": "_xVmWhyAbpnacKgp8Ov7w"
-    },
-    {
-      "email": "osman@gmail.com",
-      "password": "$2a$10$Qx0Tk3KOerMlm5na1VC11OiHmo1cnboqPqUE4tpokhFa3W8ffoTQi",
-      "id": "fij94r8ta-G9ExaMsqU1g",
-      "name": "hasan2"
-    },
-    {
-      "email": "12ewa@gmail.com",
-      "password": "$2a$10$ZxBIPfjFAefypIg/MTBOb.bvHN7k53SPcG66dAnREQrStnRBJu0U.",
-      "id": "GIKrIarhHhUK6sJB5PrIJ",
-      "name": "sdadsasd"
-    },
-    {
-      "email": "adsasda@gmail.com",
-      "password": "$2a$10$rcMsyW/SLiHb21Uxjcdaae4TPXWDguFxAilMFsNRwaFX2CuLVrBZa",
-      "id": "YDqQC4a8xvAnpr5f3qoAh",
-      "name": "dasdas"
-    },
-    {
-      "email": "adsdsadas@gmail.com",
-      "password": "$2a$10$fxk1yxvmd7PFgfvqa.1t4uWjAtDNdvrswB1lny6sUUVxxTTHoGzF.",
-      "id": "8lPxSPsDDG-YiGI-vqT-g",
-      "name": "saddsadas"
-    },
-    {
-      "email": "3t25rsd@gmail,com",
-      "password": "$2a$10$zHDoqJXmgnT6MfV5bhVlA.uoLXD3uOYfD2aaCc1vFM4DQyqg3keZi",
-      "id": "MDqESV3YhIhMBuCr5G8wq",
-      "name": "asddsads"
-    },
-    {
-      "email": "hasan2@gmail.com",
-      "password": "$2a$10$2Pjy488Y6V2UU57rQLgxRepie9ykb7/gZo203oqZkdi9PAyQ7d1eS",
-      "id": "5pRQbcxZdcMucQuKCdU3v",
-      "name": "hasan"
-    },
-    {
-      "email": "asddasdsa@gmail.com",
-      "password": "$2a$10$n1xSmAKB6ODm5Jp/QrMyROwuvos85Ht1bT1eQVUMz7b/PnoXWTeeS",
-      "id": "hLDsPFuuMRiCwmG7VTE0i",
-      "name": "sddas"
-    },
-    {
-      "email": "2431214124@gmail.com",
-      "password": "$2a$10$AInXmfs4N60cl7TaUUycN.2W63yRkVLUE5tjp5C/xFbQ1VUUDmUxu",
-      "id": "pCQCFqP3cHxZkLyZ5HGNz",
-      "name": "asddsadas"
-    },
-    {
-      "email": "sadads@gmail.com",
-      "password": "$2a$10$RMyqA437ogIbVDkqy1HeDOApDMdfHzin4hX.Neov4ZAyt.m6UdNqu",
-      "id": "TIr77dMa5cStl1w3AWq0n",
-      "name": "dsaadsdas"
-    },
-    {
-      "email": "saed2q334@gmail.com",
-      "password": "$2a$10$siL7hsa/gefVVPQXh1HN2.wCnE.GSLaGviUJXJ8i8iXv1g3//SStW",
-      "id": "2NnTvQK8E5KKmd3yhUPxj",
-      "name": "3254rwdfes"
-    },
-    {
-      "email": "ew423e@gmail.com",
-      "password": "$2a$10$Xp1l96wNBfm0nrs5c5xawukGXw9xXn7stsN3SFmHeJv8pR/ewhXVe",
-      "id": "2xjqW49MK4oI1wPJ4JZdt",
-      "name": "xszadsfdw4532"
-    },
-    {
-      "email": "turan@gmail.com",
-      "password": "$2a$10$j6PKkF90FVnVaFeAzwZzn.V7DNcS0cRjudGQYPI6xxsAaLK6SFNmm",
-      "id": "cIimKKJ8c1aMB8_Scj5b9",
-      "name": "turan"
-    },
-    {
-      "email": "ahmet@gmail.com",
-      "password": "$2a$10$eBolsFtw3XRI0HiNLPSyh.kb8ZyAH8gc6kpDdIJrjk4uQCr7.mzX2",
-      "id": "x0AdBOkWJulfiKOq_bfiE",
-      "name": "ahmet"
+      "id": "L1IP24SKvCsjp1UjBwYcQ",
+      "favorites": [
+        {
+          "id": 2,
+          "title": "Mens Casual Premium Slim Fit T-Shirts ",
+          "price": 22.3,
+          "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+          "category": "men's clothing",
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+          "rating": {
+            "rate": 4.1,
+            "count": 259
+          }
+        }
+      ]
     }
   ],
   "products": [

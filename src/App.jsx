@@ -8,8 +8,10 @@ import { addProductsFromDB, usePage } from "./redux/productSlice";
 import { useEffect } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import { getUserByToken, resetUser } from "./redux/userSlice";
+import { getUserByToken, resetUser, useUser } from "./redux/userSlice";
 import Error404 from "./pages/Error404";
+import Favorites from "./pages/Favorites";
+import ProtectedRoute from "./ProtectedRoute";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ function App() {
   useEffect(() => {
     let userToken = localStorage.getItem("token");
     if (userToken) {
-      dispatch(getUserByToken(userToken))
+      dispatch(getUserByToken(userToken));
     } else {
       dispatch(resetUser());
     }
@@ -37,10 +39,17 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="detail/:id" element={<Detail />} />
-        <Route path="*" element={<Error404 message={"Page not Found"} />} />
+        <Route path="/giris" element={<Login />} />
+        <Route path="/uyeol" element={<Register />} />
+        <Route path="/favoriler"
+          element={
+            <ProtectedRoute>
+              <Favorites />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="detay/:id" element={<Detail />} />
+        <Route path="*" element={<Error404 message={"Sayfa Bulunamadı."} />} />
       </Routes>
     </div>
   );

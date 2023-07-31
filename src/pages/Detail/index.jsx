@@ -25,6 +25,8 @@ import { FavoriteBorder, FavoriteSharp } from "@mui/icons-material";
 import RatingSection from "../../Utilities/RatingSection";
 import Error404 from "../Error404";
 import Loading from "../../components/Loading";
+import { addFavorite } from "../../redux/favoriteSlice";
+import { useUser } from "../../redux/userSlice";
 
 function Detail() {
   const [size, setSize] = useState("S");
@@ -35,10 +37,17 @@ function Detail() {
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
   const loading = useSelector(useDetailIsLoading);
+  const user = useSelector(useUser)
+
   useEffect(() => {
+    window.scroll(0,0)
     dispatch(resetDetailItem());
     dispatch(getProductById(id));
   }, []);
+
+  const handleBasket = () => {
+    dispatch(addFavorite({userId: user.id, product}))
+  }
 
   const sizeSection = () => {
     return (
@@ -85,7 +94,7 @@ function Detail() {
 
   const addToBasketBtn = () => {
     return (
-      <Button className={Styles.button} variant="contained">
+      <Button className={Styles.button} onClick={handleBasket} variant="contained">
         add to basket
       </Button>
     );
@@ -174,7 +183,7 @@ function Detail() {
       </>
     );
   else if (!product || Object.keys(product).length == 0)
-    return <Error404 message={"product not found"} />;
+    return <Error404 message={"Ürün Bulunamadı."} />;
   }
     
   

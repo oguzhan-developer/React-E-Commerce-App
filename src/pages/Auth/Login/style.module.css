@@ -1,9 +1,10 @@
-#Login{
+#login{
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
 }
 
-#Card{
+#card{
     width: 18rem;
 }
 

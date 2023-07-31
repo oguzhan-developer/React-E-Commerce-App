@@ -9,14 +9,14 @@ export const addProductsFromDB = createAsyncThunk(
   "addProductsFromDB",
   async (page) => {
     const response = await axios(
-      `${BASE_ENDPOINT}${DB_PRODUCT}?_page=${page}&_limit=${pageLenght}`,{withCredentials:true}
+      `${BASE_ENDPOINT}/${DB_PRODUCT}?_page=${page}&_limit=${pageLenght}`,{withCredentials:true}
     );
     return await response.data;
   }
 );
 
 export const getProductById = createAsyncThunk("getProductById", async (id) => {
-  const response = await fetch(`${BASE_ENDPOINT}${DB_PRODUCT}/${id}`);
+  const response = await fetch(`${BASE_ENDPOINT}/${DB_PRODUCT}/${id}`);
   return await response.json();
 });
 
@@ -24,7 +24,7 @@ const productSlice = createSlice({
   name: "products",
   initialState: {
     page: {
-      index: 0,
+      index: 1,
       isLastPage: false,
     },
     items: [],

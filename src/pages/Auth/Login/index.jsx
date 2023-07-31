@@ -19,11 +19,11 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   return (
-    <div id={Styles.Login}>
-      <Card id={Styles.Card}>
-        <label>email</label>
+    <div id={Styles.login}>
+      <Card id={Styles.card}>
+        <label>E-Posta</label>
         <InputField name="email" value={form.email} onChange={handleChange} />
-        <label>password</label>
+        <label>Şifre</label>
         <InputField
           name="password"
           value={form.password}
@@ -37,7 +37,7 @@ function Login() {
           size="md"
           variant="soft"
         >
-          Login
+          Giriş Yap
         </Button>
       </Card>
     </div>

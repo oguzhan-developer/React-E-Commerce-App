@@ -1,15 +1,18 @@
 import React from "react";
 import Styles from "./style.module.css";
-import { LinearProgress } from "@mui/joy";
+import { CircularProgress } from "@mui/joy";
 function Loading() {
   return (
-    <>
-      <LinearProgress thickness={1} />
-      <div>
-        <label id={Styles.Loading}>Loading</label>
-      </div>
-    </>
-  );
+    <div id={Styles.loading}>
+      <CircularProgress
+        color="primary"
+        determinate={false}
+        size="lg"
+        value={25}
+        variant="soft"
+      />
+    </div>
+  )
 }
 
 export default Loading;

@@ -8,7 +8,7 @@ function Card() {
   const products = useSelector(useProducts);
 
   return (
-    <div id={Styles.Card}>
+    <div id={Styles.card}>
       {products.map((product, key) => {
         return <Item key={key} product={product} />;
       })}

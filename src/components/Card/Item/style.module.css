@@ -1,6 +1,6 @@
 .item {
-  width: 18rem;
-  height: 21rem;
+  width: 19rem;
+  height: 22rem;
   margin: 0.4rem;
   opacity: 1;
   display: flex;
@@ -27,8 +27,8 @@
 }
 .image {
   padding-top: 0.3rem;
-  width: 13rem;
-  height: 13rem;
+  width: 14rem;
+  height: 14rem;
 }
 
 .label {
