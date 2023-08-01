@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
-import RatingSection from "../../../Utilities/RatingSection";
+import RatingSection from "../../../Utilities/components/RatingSection";
 function Item({ product }) {
   const navigator = useNavigate();
 

@@ -1,23 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
-const BASE_ENDPOINT = import.meta.env.VITE_BASE_ENDPOINT
-const DB_PRODUCT = import.meta.env.VITE_DB_PRODUCT
+const DB_PRODUCT = import.meta.env.VITE_DB_PRODUCT;
 const pageLenght = 12;
 
-export const addProductsFromDB = createAsyncThunk(
-  "addProductsFromDB",
+export const getProductsFromDB = createAsyncThunk(
+  "getProductsFromDB",
   async (page) => {
-    const response = await axios(
-      `${BASE_ENDPOINT}/${DB_PRODUCT}?_page=${page}&_limit=${pageLenght}`,{withCredentials:true}
-    );
-    return await response.data;
+    const querySnapshot = await getDocs(collection(db, DB_PRODUCT));
+    let products = []
+    querySnapshot.forEach((doc) => {
+      products.push(doc.data())
+    });
+    return products
   }
 );
 
 export const getProductById = createAsyncThunk("getProductById", async (id) => {
-  const response = await fetch(`${BASE_ENDPOINT}/${DB_PRODUCT}/${id}`);
-  return await response.json();
+  const querySnapshot = await getDocs(collection(db, DB_PRODUCT));
+  let product = {}
+  querySnapshot.forEach((doc) => {
+    if(doc.data().id == id)product = doc.data()
+  });
+  return product
 });
 
 const productSlice = createSlice({
@@ -50,19 +56,18 @@ const productSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    
     //Add Products From DB
     builder
-      .addCase(addProductsFromDB.pending, (state) => {
+      .addCase(getProductsFromDB.pending, (state) => {
         state.api.isLoading = true;
       })
 
-      .addCase(addProductsFromDB.rejected, (state, action) => {
+      .addCase(getProductsFromDB.rejected, (state, action) => {
         state.api.error = `${action.error.name} ${action.error.message}`;
         state.api.isLoading = false;
       })
 
-      .addCase(addProductsFromDB.fulfilled, (state, action) => {
+      .addCase(getProductsFromDB.fulfilled, (state, action) => {
         const products = action.payload;
         if (products.length != 0) {
           state.items = products;
@@ -79,7 +84,7 @@ const productSlice = createSlice({
       .addCase(getProductById.rejected, (state, action) => {
         state.detailItem.error = `${action.error.name} ${action.error.message}`;
         state.detailItem.isLoading = false;
-        state.detailItem.item = null
+        state.detailItem.item = null;
       })
 
       .addCase(getProductById.fulfilled, (state, action) => {
@@ -92,8 +97,8 @@ const productSlice = createSlice({
 export const usePage = (state) => state.product.page.index;
 export const useIsLastPage = (state) => state.product.page.isLastPage;
 export const useDetailProduct = (state) => state.product.detailItem.item;
-export const useDetailError = state => state.product.detailItem.error;
-export const useDetailIsLoading = state => state.product.detailItem.isLoading;  
+export const useDetailError = (state) => state.product.detailItem.error;
+export const useDetailIsLoading = (state) => state.product.detailItem.isLoading;
 export const useIsLoading = (state) => state.product.api.isLoading;
 export const useProducts = (state) => state.product.items;
 export const { setDetailItem, resetDetailItem, nextPage } =

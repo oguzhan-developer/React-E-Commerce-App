@@ -1,12 +1,12 @@
 import React from "react";
 import Styles from "./style.module.css";
 import { useState } from "react";
-import PasswordField from "../../../Utilities/PasswordField";
+import PasswordField from "../../../utilities/components/PasswordField";
 import { Card } from "@mui/material";
 import { Button, Input } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, useRegisterIsLoading } from "../../../redux/userSlice";
-import InputField from "../../../Utilities/InputField";
+import InputField from "../../../utilities/components/InputField";
 
 const defaultForm = { name: "", email: "", password: "" };
 function Register() {

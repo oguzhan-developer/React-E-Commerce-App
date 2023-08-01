@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Styles from "./style.module.css";
-import InputField from "../../../Utilities/InputField";
+import InputField from "../../../Utilities/components/InputField";
 import { Button, Card } from "@mui/joy";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/userSlice";

@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Navbar from "./components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductsFromDB, usePage } from "./redux/productSlice";
+import { getProductsFromDB, usePage } from "./redux/productSlice";
 import { useEffect } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   const init = () => {
-    dispatch(addProductsFromDB(page));
+    dispatch(getProductsFromDB(page));
   };
 
   return (

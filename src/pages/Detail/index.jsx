@@ -11,7 +11,6 @@ import {
 import Styles from "./style.module.css";
 import {
   Button,
-  Rating,
   Switch,
   ToggleButton,
   ToggleButtonGroup,
@@ -20,34 +19,41 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
-import { Alert, IconButton, LinearProgress } from "@mui/joy";
+import { Alert, IconButton } from "@mui/joy";
 import { FavoriteBorder, FavoriteSharp } from "@mui/icons-material";
-import RatingSection from "../../Utilities/RatingSection";
+import RatingSection from "../../Utilities/components/RatingSection";
 import Error404 from "../Error404";
 import Loading from "../../components/Loading";
-import { addFavorite } from "../../redux/favoriteSlice";
+import {
+  addFavoriteById,
+  deleteFavoriteById,
+  isFavoritedItem,
+  setFavorite,
+  useIsFavoritedItem,
+} from "../../redux/favoriteSlice";
 import { useUser } from "../../redux/userSlice";
+import getUIDByToken from "../../utilities/getUIDByToken";
 
 function Detail() {
   const [size, setSize] = useState("S");
   const [fastShipping, setFastShipping] = useState(false);
-  const [favorite, setFavorite] = useState(false);
   const [alert, setAlert] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
   const loading = useSelector(useDetailIsLoading);
-  const user = useSelector(useUser)
-
+  const isFavorited = useSelector(useIsFavoritedItem);
+  const uid = getUIDByToken()
   useEffect(() => {
-    window.scroll(0,0)
+    window.scroll(0, 0);
     dispatch(resetDetailItem());
     dispatch(getProductById(id));
+    dispatch(isFavoritedItem({uid, productId: id}));
   }, []);
 
   const handleBasket = () => {
-    dispatch(addFavorite({userId: user.id, product}))
-  }
+    dispatch(addFavorite({ userId:uid, product }));
+  };
 
   const sizeSection = () => {
     return (
@@ -94,7 +100,11 @@ function Detail() {
 
   const addToBasketBtn = () => {
     return (
-      <Button className={Styles.button} onClick={handleBasket} variant="contained">
+      <Button
+        className={Styles.button}
+        onClick={handleBasket}
+        variant="contained"
+      >
         add to basket
       </Button>
     );
@@ -103,13 +113,18 @@ function Detail() {
   const favoriteBtn = () => {
     return (
       <IconButton
-        onClick={() => {
-          setFavorite(!favorite);
-          setAlert(true);
+        onClick={async() => {
+          if (!isFavorited) {
+            await dispatch(addFavoriteById({ uid, product }));
+            setAlert(true);
+          } else {
+            await dispatch(deleteFavoriteById({ uid, product }));
+          }
+          dispatch(setFavorite(!isFavorited));
         }}
       >
-        {favorite && <FavoriteSharp />}
-        {!favorite && <FavoriteBorder />}
+        {isFavorited && <FavoriteSharp />}
+        {!isFavorited && <FavoriteBorder />}
       </IconButton>
     );
   };
@@ -142,51 +157,49 @@ function Detail() {
     }
   };
 
-  if(loading) return <Loading />
-  else{
+  if (loading) return <Loading />;
+  else {
     if (product && Object.keys(product).length > 0)
-    return (
-      <>
-        <div className={Styles.item}>
-          <div>
-            <img className={Styles.image} src={product.image} />
-          </div>
-          <div>
-            <span id={Styles.Span_title}>
-              <strong name="title" className={Styles.label}>
-                {product.title}
-              </strong>
-              <span name="category" id={Styles.Category}>
-                {product.category}
+      return (
+        <>
+          <div className={Styles.item}>
+            <div>
+              <img className={Styles.image} src={product.image} />
+            </div>
+            <div>
+              <span id={Styles.Span_title}>
+                <strong name="title" className={Styles.label}>
+                  {product.title}
+                </strong>
+                <span name="category" id={Styles.Category}>
+                  {product.category}
+                </span>
               </span>
-            </span>
-            <p>{product.description}</p>
-            <div name="price" id={Styles.Price}>
-              {product.price}$
-            </div>
-
-            <div id={Styles.Customize}>
-              {sizeSection()}
-              {shippingSection()}
-            </div>
-
-            <div id={Styles.Div_bottom}>
-              <div id={Styles.div_btn_favorite}>
-                {addToBasketBtn()}
-                {favoriteBtn()}
+              <p>{product.description}</p>
+              <div name="price" id={Styles.Price}>
+                {product.price}$
               </div>
-              <RatingSection product={product} size="medium" />
+
+              <div id={Styles.Customize}>
+                {sizeSection()}
+                {shippingSection()}
+              </div>
+
+              <div id={Styles.Div_bottom}>
+                <div id={Styles.div_btn_favorite}>
+                  {addToBasketBtn()}
+                  {favoriteBtn()}
+                </div>
+                <RatingSection product={product} size="medium" />
+              </div>
             </div>
           </div>
-        </div>
-        {favoriteAlert()}
-      </>
-    );
-  else if (!product || Object.keys(product).length == 0)
-    return <Error404 message={"Ürün Bulunamadı."} />;
+          {favoriteAlert()}
+        </>
+      );
+    else if (!product || Object.keys(product).length == 0)
+      return <Error404 message={"Ürün Bulunamadı."} />;
   }
-    
-  
 }
 
 export default Detail;

@@ -1,14 +1,11 @@
-import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-
-const BASE_URL = import.meta.env.VITE_BASE_ENDPOINT;
+import { collection, getDocs, setDoc } from "firebase/firestore";
+import getUIDByToken from "../utilities/getUIDByToken";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const registerUser = createAsyncThunk(
@@ -18,21 +15,20 @@ export const registerUser = createAsyncThunk(
       auth,
       email,
       password
-    );
-    const user = userCredential.user;
+    ); // Added user to auth.
+
+    //then add user to firestore database
+    const user = userCredential.user
     const uid = user.uid;
-    localStorage.setItem("token", user.accessToken);
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-        uid,
-        name,
-        email,
-        password,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+
+    await setDoc(doc(db, DB_USER, uid), {
+      uid,
+      name,
+      email,
+      password,
+      favorites:[]
+    });
+
     return { accessToken: user.accessToken, uid, name, email };
   }
 );
@@ -53,13 +49,29 @@ export const loginUser = createAsyncThunk(
 export const getUserByToken = createAsyncThunk(
   "getUserByToken",
   async (userToken) => {
-    const decodedUser = jwtDecode(userToken);
-    const userId = decodedUser.sub;
-    const querySnapshot = await getDocs(collection(db, "users"));
-    return {data: querySnapshot, userId};
+    const userId = getUIDByToken()
+    const querySnapshot = await getDocs(
+      collection(db, import.meta.env.VITE_DB_USER)
+    );
+    return { data: querySnapshot, userId };
   }
 );
 
+
+
+/* import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
+const washingtonRef = doc(db, "cities", "DC");
+
+// Atomically add a new region to the "regions" array field.
+await updateDoc(washingtonRef, {
+    regions: arrayUnion("greater_virginia")
+});
+
+// Atomically remove a region from the "regions" array field.
+await updateDoc(washingtonRef, {
+    regions: arrayRemove("east_coast")
+}); */
 
 const userSlice = createSlice({
   name: "user",
@@ -132,8 +144,8 @@ const userSlice = createSlice({
         state.user = null; //expired acces token
       })
       .addCase(getUserByToken.fulfilled, (state, action) => {
-        const users = action.payload.data
-        const userId = action.payload.userId
+        const users = action.payload.data;
+        const userId = action.payload.userId;
         users.forEach((user) => {
           let data = user.data();
           if (userId == data.uid) {
@@ -142,7 +154,8 @@ const userSlice = createSlice({
         });
         state.getUser.isLoading = false;
         state.getUser.error = null;
-      });
+      })
+
   },
 });
 export const useUser = (state) => state.user.user;
