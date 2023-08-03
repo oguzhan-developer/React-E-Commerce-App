@@ -58,6 +58,7 @@ function SizesAndQuantity() {
       </span>
     </div>
   );
+  
 }
 
 export default SizesAndQuantity;
