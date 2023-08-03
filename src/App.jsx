@@ -8,10 +8,11 @@ import { getProductsFromDB, usePage } from "./redux/productSlice";
 import { useEffect } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import { getUserByToken, resetUser, useUser } from "./redux/userSlice";
+import { getUserByID, resetUser, useUser } from "./redux/userSlice";
 import Error404 from "./pages/Error404";
 import Favorites from "./pages/Favorites";
 import ProtectedRoute from "./ProtectedRoute";
+import { Button } from "antd";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     let userToken = localStorage.getItem("token");
     if (userToken) {
-      dispatch(getUserByToken(userToken));
+      dispatch(getUserByID());
     } else {
       dispatch(resetUser());
     }
@@ -37,7 +38,7 @@ function App() {
   return (
     <div id="App">
       <Navbar />
-      <Routes>
+      { <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/giris" element={<Login />} />
         <Route path="/uyeol" element={<Register />} />
@@ -50,7 +51,7 @@ function App() {
         />
         <Route path="detay/:id" element={<Detail />} />
         <Route path="*" element={<Error404 message={"Sayfa Bulunamadı."} />} />
-      </Routes>
+      </Routes> }
     </div>
   );
 }

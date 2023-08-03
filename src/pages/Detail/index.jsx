@@ -9,18 +9,7 @@ import {
   useDetailProduct,
 } from "../../redux/productSlice";
 import Styles from "./style.module.css";
-import {
-  Button,
-  Switch,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
-import { Alert, IconButton } from "@mui/joy";
-import { FavoriteBorder, FavoriteSharp } from "@mui/icons-material";
 import RatingSection from "../../Utilities/components/RatingSection";
 import Error404 from "../Error404";
 import Loading from "../../components/Loading";
@@ -33,7 +22,15 @@ import {
 } from "../../redux/favoriteSlice";
 import { useUser } from "../../redux/userSlice";
 import getUIDByToken from "../../utilities/getUIDByToken";
-
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import Slider from "./components/Slider";
+import { Divider, Skeleton } from "antd";
+import Tab from "./components/Tab";
+import Rating from "./components/Rating";
+import Favorite from "./components/Favorite";
+import SkeletonComponent from "./components/Skeleton";
 function Detail() {
   const [size, setSize] = useState("S");
   const [fastShipping, setFastShipping] = useState(false);
@@ -42,164 +39,46 @@ function Detail() {
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
   const loading = useSelector(useDetailIsLoading);
-  const isFavorited = useSelector(useIsFavoritedItem);
-  const uid = getUIDByToken()
+  const uid = getUIDByToken();
+
   useEffect(() => {
     window.scroll(0, 0);
     dispatch(resetDetailItem());
     dispatch(getProductById(id));
-    dispatch(isFavoritedItem({uid, productId: id}));
+    dispatch(isFavoritedItem({ uid, productId: id }));
   }, []);
 
-  const handleBasket = () => {
-    dispatch(addFavorite({ userId:uid, product }));
+  const isProductExist = () => {
+    if (!loading && product && Object.keys(product).length > 0) {
+      return true;
+    } else return false;
   };
 
-  const sizeSection = () => {
+  if (!loading && product && Object.keys(product).length == 0)
+    return <Error404 message={"Ürün Bulunamadı."} />;
+
+  if (isProductExist())
     return (
-      <ToggleButtonGroup
-        id={Styles.Size_area}
-        color="primary"
-        value={size}
-        exclusive
-        onChange={(e) => {
-          setSize(e.target.innerText);
-        }}
-        aria-label="Sizes"
-      >
-        <ToggleButton className={Styles.togglebtn} value="S">
-          S
-        </ToggleButton>
-        <ToggleButton className={Styles.togglebtn} value="M">
-          M
-        </ToggleButton>
-        <ToggleButton className={Styles.togglebtn} value="L">
-          L
-        </ToggleButton>
-        <ToggleButton className={Styles.togglebtn} value="XL">
-          XL
-        </ToggleButton>
-      </ToggleButtonGroup>
-    );
-  };
-
-  const shippingSection = () => {
-    return (
-      <span id={Styles.ShippingTypes}>
-        <strong>
-          {fastShipping && "Fast Shipping"}
-          {!fastShipping && "Standart Shipping"}
-        </strong>
-        <Switch
-          checked={fastShipping}
-          onClick={() => setFastShipping(!fastShipping)}
-        />
-      </span>
-    );
-  };
-
-  const addToBasketBtn = () => {
-    return (
-      <Button
-        className={Styles.button}
-        onClick={handleBasket}
-        variant="contained"
-      >
-        add to basket
-      </Button>
-    );
-  };
-
-  const favoriteBtn = () => {
-    return (
-      <IconButton
-        onClick={async() => {
-          if (!isFavorited) {
-            await dispatch(addFavoriteById({ uid, product }));
-            setAlert(true);
-          } else {
-            await dispatch(deleteFavoriteById({ uid, product }));
-          }
-          dispatch(setFavorite(!isFavorited));
-        }}
-      >
-        {isFavorited && <FavoriteSharp />}
-        {!isFavorited && <FavoriteBorder />}
-      </IconButton>
-    );
-  };
-
-  const favoriteAlert = () => {
-    if (alert) {
-      setTimeout(() => setAlert(false), 1000);
-      return (
-        <Alert
-          sx={{ alignItems: "flex-start" }}
-          startDecorator={React.cloneElement(<CheckCircleIcon />, {
-            sx: { mt: "2px", mx: "4px" },
-            fontSize: "xl2",
-          })}
-          variant="soft"
-          color="success"
-          endDecorator={
-            <IconButton variant="soft" size="sm" color="success">
-              <CloseRoundedIcon onClick={() => setAlert(false)} />
-            </IconButton>
-          }
-        >
-          <div>
-            <Typography fontWeight="lg" mt={0.25}>
-              {"Favorited."}
-            </Typography>
+      <>
+        <div id={Styles.item}>
+          <div id={Styles.div_image}>
+            <Slider images={product.images} />
           </div>
-        </Alert>
-      );
-    }
-  };
-
-  if (loading) return <Loading />;
-  else {
-    if (product && Object.keys(product).length > 0)
-      return (
-        <>
-          <div className={Styles.item}>
-            <div>
-              <img className={Styles.image} src={product.image} />
+          <div id={Styles.div_detail}>
+            <Divider plain id={Styles.product_title_divider}>
+              <label id={Styles.product_title_label}>{product.title}</label>
+            </Divider>
+            <div id={Styles.header_div}>
+              <Rating rating={product.rating} />
+              <Favorite product={product} />
             </div>
-            <div>
-              <span id={Styles.Span_title}>
-                <strong name="title" className={Styles.label}>
-                  {product.title}
-                </strong>
-                <span name="category" id={Styles.Category}>
-                  {product.category}
-                </span>
-              </span>
-              <p>{product.description}</p>
-              <div name="price" id={Styles.Price}>
-                {product.price}$
-              </div>
-
-              <div id={Styles.Customize}>
-                {sizeSection()}
-                {shippingSection()}
-              </div>
-
-              <div id={Styles.Div_bottom}>
-                <div id={Styles.div_btn_favorite}>
-                  {addToBasketBtn()}
-                  {favoriteBtn()}
-                </div>
-                <RatingSection product={product} size="medium" />
-              </div>
-            </div>
+            <Tab />
+            <div id={Styles.div_sizes}></div>
           </div>
-          {favoriteAlert()}
-        </>
-      );
-    else if (!product || Object.keys(product).length == 0)
-      return <Error404 message={"Ürün Bulunamadı."} />;
-  }
+        </div>
+      </>
+    )
+    else return <SkeletonComponent />
 }
 
 export default Detail;

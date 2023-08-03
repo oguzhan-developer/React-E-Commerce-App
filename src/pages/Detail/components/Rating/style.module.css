@@ -1,0 +1,23 @@
+#left_div {
+  display: flex;
+  align-items: baseline;
+}
+
+#rate_label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+#count_label {
+  font-weight: 300;
+  margin-left: 0.5rem;
+}
+
+#count_label span {
+  font-weight: 500;
+}
+
+#rate_label,
+#count_label {
+  font-size: small;
+}

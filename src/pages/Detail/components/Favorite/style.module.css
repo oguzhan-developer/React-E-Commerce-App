@@ -1,0 +1,7 @@
+.favorite{
+    margin-right: 1rem;
+}
+
+.favorite:hover{
+    opacity: 0.8;
+}

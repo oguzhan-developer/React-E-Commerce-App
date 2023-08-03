@@ -4,15 +4,17 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #5c5959;
-  background: floralwhite;
+  border-bottom: 1px solid thistle;
+  background: #fcfaf6;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   color: brown;
   z-index: 10;
-  width: 99%;
   height: 3.8rem;
   margin: 0;
-  padding: 0;
+  padding: 0 14rem;
   top: 0;
+  padding-left: 1rem;
+  position: sticky;
 }
 
 #shop_name {
@@ -44,4 +46,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#favorite {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
+
+#favorite #heart_icon {
+  color: black;
+  margin-right: 0.2rem;
+  font-size: 1.2rem;
+  height: 40px;
+}
+
+#favorite #heart_label {
+  color: black;
+  font-size: 1rem;
+  height: 40px;
 }

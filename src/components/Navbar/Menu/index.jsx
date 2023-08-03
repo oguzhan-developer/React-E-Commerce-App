@@ -1,61 +1,35 @@
 import React, { useEffect } from "react";
 import Styles from "./style.module.css";
-import { Button, Menu, MenuItem } from "@mui/joy";
 import Favorites from "../../../pages/Favorites";
-import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { Button, Dropdown } from "antd";
 function MenuComponent({ userName }) {
-  const buttonRef = React.useRef(null);
-  const [open, setOpen] = React.useState(false);
-  const navigator = useNavigate();
+  const items = [
+    {
+      key: "profile",
+      label: <Link to={import.meta.env.VITE_PAGE_ACCOUNT}>Hesabım</Link>,
+    },
+    {
+      key: "favorite",
+      label: <Link to={import.meta.env.VITE_PAGE_FAVORITE}>Favoriler</Link>,
+    },
+    {
+      key: "logout",
+      label: <a>Çıkış Yap</a>,
+    },
+  ];
+
   const firstLetterUpper = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   };
 
-  const handleClose = (e) => {
-    setOpen(false);
-    switch (e.target.id) {
-      case "profile":
-        return null;
-      case "favorite":
-        return navigator(import.meta.env.VITE_PAGE_FAVORITE);
-      case "logout":
-        return null;
-    }
-  };
-
   return (
-    <div id={Styles.Menu}>
-      <Button
-        ref={buttonRef}
-        id="basic-demo-button"
-        aria-controls={"basic-menu"}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="outlined"
-        color="neutral"
-        onClick={() => {
-          setOpen(!open);
-        }}
-      >
-        {firstLetterUpper(userName)}
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={buttonRef.current}
-        open={open}
-        aria-labelledby="basic-demo-button"
-      >
-        <MenuItem id="profile" onClick={handleClose}>
-          Hesabım
-        </MenuItem>
-        <MenuItem id="favorite" onClick={handleClose}>
-          Favorilerim
-        </MenuItem>
-        <MenuItem id="logout" onClick={handleClose}>
-          Çıkış Yap
-        </MenuItem>
-      </Menu>
+    <div id={Styles.menu}>
+      <Dropdown menu={{ items }} placement="bottomLeft">
+        <Button id={Styles.button} type="link" color="black" style={{ width: "6rem" }}>
+          <strong id={Styles.label}>{firstLetterUpper(userName)}</strong>
+        </Button>
+      </Dropdown>
     </div>
   );
 }

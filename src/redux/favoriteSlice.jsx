@@ -7,11 +7,13 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useSelector } from "react-redux";
 const DB_USER = import.meta.env.VITE_DB_USER;
-
 export const addFavoriteById = createAsyncThunk(
   "addFavoriteById",
   async ({ uid, product }) => {
+    console.log(uid);
+    if (!uid) return;
     const userRef = doc(db, DB_USER, uid);
     await updateDoc(userRef, {
       favorites: arrayUnion(product),
@@ -21,6 +23,7 @@ export const addFavoriteById = createAsyncThunk(
 export const deleteFavoriteById = createAsyncThunk(
   "deleteFavoriteById",
   async ({ uid, product }) => {
+    if (!uid) return;
     const userRef = doc(db, DB_USER, uid);
     await updateDoc(userRef, {
       favorites: arrayRemove(product),
@@ -31,6 +34,7 @@ export const deleteFavoriteById = createAsyncThunk(
 export const isFavoritedItem = createAsyncThunk(
   "isFavoritedItem",
   async ({ uid, productId }) => {
+    if (!uid) return false;
     const docRef = doc(db, DB_USER, uid);
     const favoritedItemsDoc = await getDoc(docRef);
     let isFavorited = false;
@@ -71,6 +75,7 @@ const favoriteSlice = createSlice({
       .addCase(addFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.isFavoritedItem = !state.isFavoritedItem
       })
 
       .addCase(isFavoritedItem.fulfilled, (state, action) => {
@@ -92,6 +97,8 @@ const favoriteSlice = createSlice({
       .addCase(deleteFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.isFavoritedItem = !state.isFavoritedItem
+
       });
   },
 });

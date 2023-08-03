@@ -1,0 +1,11 @@
+#slider {
+  border-radius: 8px;
+  margin: 0 2rem;
+}
+
+.image {
+}
+#slider,
+.image {
+  width: 34rem;
+}

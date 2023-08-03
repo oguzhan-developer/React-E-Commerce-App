@@ -1,12 +1,9 @@
 import React from "react";
 import Styles from "./style.module.css";
 import { useState } from "react";
-import PasswordField from "../../../utilities/components/PasswordField";
-import { Card } from "@mui/material";
-import { Button, Input } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, useRegisterIsLoading } from "../../../redux/userSlice";
-import InputField from "../../../utilities/components/InputField";
+import { Input } from "antd";
 
 const defaultForm = { name: "", email: "", password: "" };
 function Register() {
@@ -28,11 +25,11 @@ function Register() {
     <>
       <div id={Styles.register}>
         <br />
-        <Card id={Styles.card} variant="outlined">
+        <card id={Styles.card} variant="outlined">
           <h4>Register and Don't miss out on discounts!</h4>
           <form onSubmit={handleBtn}>
-            <label>Ad</label>
-            <InputField
+            <Title>Ad</Title>
+            <Input
               name="name"
               value={form.name}
               onChange={handleChange}
@@ -40,17 +37,17 @@ function Register() {
             />
             <br />
 
-            <label>E-Posta</label>
-            <InputField
+            <Title>E-Posta</Title>
+            <Input
               name="email"
               value={form.email}
               onChange={handleChange}
               required={true}
             />
             <br />
-            <label>Şifre</label>
+            <Title>Şifre</Title>
 
-            <PasswordField
+            <Input
               name="password"
               showPassword={showPassword}
               setShowPassword={setShowPassword}
@@ -65,7 +62,7 @@ function Register() {
             </Button>
           </form>
           <br />
-        </Card>
+        </card>
       </div>
     </>
   );

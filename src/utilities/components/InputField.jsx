@@ -1,4 +1,3 @@
-import { Input } from "@mui/joy";
 import React from "react";
 
 function InputField({
@@ -10,7 +9,7 @@ function InputField({
   onChange,
   required,
 }) {
-  return (
+  /* return (
     <Input
     id={id}
       placeholder={placeholder}
@@ -45,7 +44,7 @@ function InputField({
       }}
 
     />
-  );
+  ); */
 }
 
 export default InputField;

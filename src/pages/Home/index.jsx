@@ -1,4 +1,3 @@
-import { Button } from "@mui/joy";
 import React from "react";
 import Card from "../../components/Card";
 import Styles from "./style.module.css";
@@ -17,9 +16,9 @@ function Home() {
       
       <Card />
       <br />
-      {!isLastPage && (
-        <Button onClick={() => dispatch(nextPage())}>Daha fazla</Button>
-      )}
+{/*       {!isLastPage && (
+        <button onClick={() => dispatch(nextPage())}>Daha fazla</button>
+      )} */}
       {isLastPage && <h4>Son sayfadasınız.</h4>}
     </div>
   );

@@ -9,5 +9,4 @@ function getUIDByToken() {
 
   return userId;
 }
-
 export default getUIDByToken;

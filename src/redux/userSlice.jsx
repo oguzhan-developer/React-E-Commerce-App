@@ -46,9 +46,9 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getUserByToken = createAsyncThunk(
+export const getUserByID = createAsyncThunk(
   "getUserByToken",
-  async (userToken) => {
+  async () => {
     const userId = getUIDByToken()
     const querySnapshot = await getDocs(
       collection(db, import.meta.env.VITE_DB_USER)
@@ -135,15 +135,15 @@ const userSlice = createSlice({
         localStorage.setItem("token", action.payload.accessToken);
       })
 
-      .addCase(getUserByToken.pending, (state) => {
+      .addCase(getUserByID.pending, (state) => {
         state.getUser.isLoading = true;
       })
-      .addCase(getUserByToken.rejected, (state, action) => {
+      .addCase(getUserByID.rejected, (state, action) => {
         state.getUser.isLoading = false;
         state.getUser.error = `${action.error.name} ${action.error.message}`;
         state.user = null; //expired acces token
       })
-      .addCase(getUserByToken.fulfilled, (state, action) => {
+      .addCase(getUserByID.fulfilled, (state, action) => {
         const users = action.payload.data;
         const userId = action.payload.userId;
         users.forEach((user) => {
