@@ -31,6 +31,7 @@ import Tab from "./components/Tab";
 import Rating from "./components/Rating";
 import Favorite from "./components/Favorite";
 import SkeletonComponent from "./components/Skeleton";
+import SizesAndQuantity from "./components/SizesAndQuantity";
 function Detail() {
   const [size, setSize] = useState("S");
   const [fastShipping, setFastShipping] = useState(false);
@@ -72,8 +73,11 @@ function Detail() {
               <Rating rating={product.rating} />
               <Favorite product={product} />
             </div>
+              <label id={Styles.price_label}>TL{product.price}</label>
             <Tab />
-            <div id={Styles.div_sizes}></div>
+            <div id={Styles.div_sizes}>
+              <SizesAndQuantity />
+            </div>
           </div>
         </div>
       </>

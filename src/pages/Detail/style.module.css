@@ -15,7 +15,7 @@
 }
 
 #product_title_label {
-  font-size: 1.3rem !important;
+  font-size: 1.4rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.1rem;
   text-wrap: wrap;
@@ -25,5 +25,14 @@
 
 #product_title_divider {
   width: 43rem;
+}
+
+#div_sizes{
+  margin-top: 1rem;
+}
+
+#price_label{
+  margin-top: 0.2rem;
+  font-size: 2rem;
 }
 
