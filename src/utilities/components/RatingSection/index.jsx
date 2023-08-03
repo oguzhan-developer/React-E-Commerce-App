@@ -1,9 +1,9 @@
 import React from 'react'
 import Styles from "./style.module.css"
-import { Rating } from '@mui/material';
-function RatingSection({product, size}) {
-    return (
-        <span id={Styles.Rating}>
+function RatingSection(/* {product, size} */) {
+    return 
+}
+  /* <span id={Styles.Rating}>
           <strong>{product.rating.rate}</strong>
           <Rating
             id={Styles.Stars}
@@ -14,8 +14,6 @@ function RatingSection({product, size}) {
             readOnly
           />
           <>{`${product.rating.count} reviews.`}</>
-        </span>
-      );
-}
+        </span> */
 
 export default RatingSection

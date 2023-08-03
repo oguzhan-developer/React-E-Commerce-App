@@ -1,0 +1,24 @@
+#div_skeleton {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.image_skeleton {
+  margin-left: 1rem;
+  margin-right: 2rem;
+  width: 34rem !important;
+  height: 34rem !important;
+}
+
+#image_skeleton_icon {
+  font-size: 5rem;
+}
+
+.p {
+  margin-bottom: 0.3rem;
+}
+
+.top{
+    margin-bottom: 2.4rem;
+}

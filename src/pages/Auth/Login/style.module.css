@@ -3,12 +3,18 @@
     justify-content: center;
     margin-top: 2rem;
 }
-
-#card{
-    width: 18rem;
+#form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20rem;
 }
 
-#btn_login{
-    width: 8rem;
-    margin: 0 auto;
+.input{
+    width: 15rem;
+    height: 2.3rem;
 }
+#button{
+
+}
+

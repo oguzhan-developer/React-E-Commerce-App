@@ -1,8 +1,13 @@
+body {
+  margin: 0;
+  overflow-y: scroll;
+  user-select: none;
+}
 #root {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  min-height: 97.5vh;
-  font-family: "roboto";
+  min-height: 100vh;
+  font-family: "Raleway", sans-serif;
   background: aliceblue;
 }

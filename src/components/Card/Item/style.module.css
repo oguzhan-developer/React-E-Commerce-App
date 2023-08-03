@@ -1,44 +1,36 @@
 .item {
-  width: 19rem;
-  height: 22rem;
-  margin: 0.4rem;
+  width: 28rem;
+  height: 28rem;
+  margin: 1rem;
   opacity: 1;
+  cursor: pointer;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  /*   border-radius: 15px;
- */
-  cursor: pointer;
 }
 
 .item:hover {
   opacity: 0.95;
-  .button {
-    opacity: 1;
-  }
 }
 
-.button {
-  opacity: 0;
-  width: 97%;
-  margin: 0 !important;
-}
 .image {
   padding-top: 0.3rem;
-  width: 14rem;
-  height: 14rem;
+  width: 28rem;
+  height: 28rem;
 }
 
 .label {
   margin: 0.3rem;
+  margin-top: 1rem;
   text-wrap: wrap;
-  width: 16rem;
+  width: 25rem;
+  font-size: 1.08rem;
 }
 
 .label_price {
-  font-size: large;
+  margin-top: 0.2rem;
+  font-size: medium;
   /*   margin: 0.3rem;
  */
   display: flex;

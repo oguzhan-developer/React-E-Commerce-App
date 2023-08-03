@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Styles from "./style.module.css"
 function Favorites() {
   return (
-    <div>Favorites</div>
+    <div id={Styles.favorites}>Favorites</div>
   )
 }
 

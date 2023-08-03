@@ -11,30 +11,29 @@
     "db": "json-server --watch db.json  -m ./node_modules/json-server-auth --port 3004"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
+    "@ant-design/icons": "^5.2.4",
     "@fontsource/roboto": "^5.0.5",
-    "@mui/icons-material": "^5.14.0",
-    "@mui/joy": "^5.0.0-alpha.89",
-    "@mui/material": "^5.14.0",
+    "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "antd": "^5.8.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "firebase": "^10.1.0",
-    "framer-motion": "^10.12.21",
+    "framer-motion": "^10.15.0",
     "jwt-decode": "^3.1.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
-    "react-query": "^3.39.3",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^10.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -47,7 +46,6 @@
     "eslint-plugin-react-refresh": "^0.4.1",
     "json-server": "^0.17.3",
     "json-server-auth": "^2.1.0",
-    "postcss": "^8.4.26",
     "react-error-overlay": "^6.0.9",
     "vite": "^4.4.0"
   }
