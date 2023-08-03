@@ -25,7 +25,7 @@ function Tab() {
       children: `Content of Tab Pane 3`,
     },
   ];
-  return <Tabs id={Styles.tab}  defaultActiveKey="1" items={items} />;
+  return <Tabs id={Styles.tab} defaultActiveKey="1" items={items} />;
 }
 
 export default Tab;
