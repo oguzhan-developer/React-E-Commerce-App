@@ -1,6 +1,12 @@
+#tab{
+}
 #label{
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.1rem;
     color: black;
 }
+#div_sizes{
+    margin-top: 1rem;
+}
+

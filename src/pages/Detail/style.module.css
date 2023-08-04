@@ -27,12 +27,8 @@
   width: 43rem;
 }
 
-#div_sizes{
-  margin-top: 1rem;
-}
-
 #price_label{
-  margin-top: 0.2rem;
+  margin: 0.4rem 0;
   font-size: 2rem;
 }
 

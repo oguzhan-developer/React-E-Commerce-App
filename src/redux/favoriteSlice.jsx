@@ -7,8 +7,12 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { useSelector } from "react-redux";
+import {
+  succesAddFavorite,
+  succesRemoveFavorite,
+} from "../pages/Detail/components/Favorite";
 const DB_USER = import.meta.env.VITE_DB_USER;
+
 export const addFavoriteById = createAsyncThunk(
   "addFavoriteById",
   async ({ uid, product }) => {
@@ -75,7 +79,8 @@ const favoriteSlice = createSlice({
       .addCase(addFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.isFavoritedItem = !state.isFavoritedItem
+        state.isFavoritedItem = !state.isFavoritedItem;
+        succesAddFavorite();
       })
 
       .addCase(isFavoritedItem.fulfilled, (state, action) => {
@@ -97,8 +102,8 @@ const favoriteSlice = createSlice({
       .addCase(deleteFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.isFavoritedItem = !state.isFavoritedItem
-
+        state.isFavoritedItem = !state.isFavoritedItem;
+        succesRemoveFavorite();
       });
   },
 });

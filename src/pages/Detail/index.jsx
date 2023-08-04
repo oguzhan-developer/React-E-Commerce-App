@@ -75,9 +75,6 @@ function Detail() {
             </div>
               <label id={Styles.price_label}>TL{product.price}</label>
             <Tab />
-            <div id={Styles.div_sizes}>
-              <SizesAndQuantity />
-            </div>
           </div>
         </div>
       </>
