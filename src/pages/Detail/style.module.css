@@ -18,9 +18,8 @@
   font-size: 1.4rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.1rem;
-  text-wrap: wrap;
   width: max-content;
-  max-width: 40rem;
+  max-width: 45rem;
 }
 
 #product_title_divider {
