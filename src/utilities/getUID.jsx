@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import React from "react";
 
-function getUIDByToken() {
+function getUID() {
   const userToken = localStorage.getItem("token");
   if (!userToken) return null;
   const decodedUser = jwtDecode(userToken);
@@ -9,4 +9,4 @@ function getUIDByToken() {
 
   return userId;
 }
-export default getUIDByToken;
+export default getUID;

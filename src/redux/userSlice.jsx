@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
-import getUIDByToken from "../utilities/getUIDByToken";
+import getUID from "../utilities/getUID";
 import { succesRegister } from "../pages/Auth/Register";
 import { succesLogin } from "../pages/Auth/Login";
 const DB_USER = import.meta.env.VITE_DB_USER;
@@ -49,7 +49,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const getUserByID = createAsyncThunk("getUserByToken", async () => {
-  const userId = getUIDByToken();
+  const userId = getUID();
   const querySnapshot = await getDocs(
     collection(db, import.meta.env.VITE_DB_USER)
   );

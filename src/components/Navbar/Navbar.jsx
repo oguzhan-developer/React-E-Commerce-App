@@ -10,6 +10,10 @@ function Navbar() {
   const navigator = useNavigate();
   const user = useSelector(useUser);
 
+  const handleFavorite = () => {
+    navigator(import.meta.env.VITE_DB_FAVORITE)
+  }
+
   const basketIcon = () => {
     return null;
     /*  <SvgIcon
@@ -46,9 +50,9 @@ function Navbar() {
         <div id={Styles.user_menu}>
           {basketIcon()}
           <div style={{display:"flex"}}>
-            <Button type="text" id={Styles.favorite}>
-              <HeartOutlined id={Styles.heart_icon} />
-              <label id={Styles.heart_label}>Favorilerim</label>
+            <Button onClick={handleFavorite} type="text" id={Styles.favorite}>
+              <HeartOutlined id={Styles.favorite_icon} />
+              <label id={Styles.favorite_label}>Favorilerim</label>
             </Button>
           </div>
           <MenuComponent userName={user.name} />

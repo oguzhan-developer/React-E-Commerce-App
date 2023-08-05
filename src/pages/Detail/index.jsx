@@ -11,7 +11,6 @@ import {
 import Styles from "./style.module.css";
 import Error404 from "../Error404";
 import { isFavoritedItem } from "../../redux/favoriteSlice";
-import getUIDByToken from "../../utilities/getUIDByToken";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -21,12 +20,13 @@ import Tab from "./components/Tab";
 import Rating from "./components/Rating";
 import Favorite from "./components/Favorite";
 import SkeletonComponent from "./components/Skeleton";
+import getUID from "../../utilities/getUID";
 function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
   const loading = useSelector(useDetailIsLoading);
-  const uid = getUIDByToken();
+  const uid = getUID();
 
   useEffect(() => {
     window.scroll(0, 0);

@@ -33,6 +33,18 @@ export const deleteFavoriteById = createAsyncThunk(
   }
 );
 
+export const getFavoritesById = createAsyncThunk(
+  "getFavoritesById",
+  async ({ uid }) => {
+    const docRef = doc(db, DB_USER, uid);
+    const favoritedItemsDoc = await getDoc(docRef);
+    if (favoritedItemsDoc.exists()) {
+      const favoritedItems = favoritedItemsDoc.data().favorites;
+      return favoritedItems
+    }
+  }
+);
+
 export const isFavoritedItem = createAsyncThunk(
   "isFavoritedItem",
   async ({ uid, productId }) => {
@@ -54,6 +66,7 @@ export const isFavoritedItem = createAsyncThunk(
 const favoriteSlice = createSlice({
   name: "favorites",
   initialState: {
+    favorites: [],
     isLoading: false,
     error: null,
     isFavoritedItem: false,
@@ -72,7 +85,7 @@ const favoriteSlice = createSlice({
       .addCase(addFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
-        notLoginFavorite()
+        notLoginFavorite();
       })
       .addCase(addFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -92,7 +105,7 @@ const favoriteSlice = createSlice({
       .addCase(deleteFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
-        notLoginFavorite()
+        notLoginFavorite();
       })
       .addCase(deleteFavoriteById.pending, (state, action) => {
         state.isLoading = true;
@@ -103,9 +116,14 @@ const favoriteSlice = createSlice({
         state.error = null;
         state.isFavoritedItem = !state.isFavoritedItem;
         succesRemoveFavorite();
-      });
+      })
+
+      .addCase(getFavoritesById.fulfilled, (state, action) => {
+        state.favorites = action.payload
+      })
   },
 });
 export const { setFavorite } = favoriteSlice.actions;
 export const useIsFavoritedItem = (state) => state.favorite.isFavoritedItem;
+export const useFavorites = state => state.favorite.favorites
 export default favoriteSlice.reducer;
