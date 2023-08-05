@@ -12,10 +12,13 @@ import Styles from "./style.module.css";
 import { message } from "antd";
 
 export const succesAddFavorite = () => {
-  message.success("Favorilere eklendi", 1);
+  message.success("Favorilere eklendi.", 1);
 };
 export const succesRemoveFavorite = () => {
-  message.success("Favorilerden çıkarıldı", 1);
+  message.success("Favorilerden çıkarıldı.", 1);
+};
+export const notLoginFavorite = () => {
+  message.info("Lütfen giriş yapın.", 1);
 };
 
 function Favorite({ product }) {

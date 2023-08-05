@@ -4,8 +4,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { collection, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import getUIDByToken from "../utilities/getUIDByToken";
+import { succesRegister } from "../pages/Auth/Register";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const registerUser = createAsyncThunk(
@@ -114,11 +115,13 @@ const userSlice = createSlice({
         state.register.isLoading = false;
         state.register.error = null;
         localStorage.setItem("token", action.payload.accessToken);
+        const uid = action.payload.uid
+        const name= action.payload.name
+        const email= action.payload.email
         state.user = {
-          uid: action.payload.uid,
-          name: action.payload.name,
-          email: action.payload.email,
+          uid,name,email
         };
+        succesRegister(name)
       })
 
       .addCase(loginUser.pending, (state) => {
@@ -131,8 +134,8 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.login.isLoading = false;
         state.login.error = null;
-        console.log(action.payload);
         localStorage.setItem("token", action.payload.accessToken);
+        window.location.href = "/"
       })
 
       .addCase(getUserByID.pending, (state) => {

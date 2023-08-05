@@ -10,12 +10,15 @@
   align-items: center;
 }
 
-h4 {
-  padding: 0.2rem 2rem;
-  padding-top: 0;
+#form{
+  width: 20rem;
 }
 
-label {
+#label {
   display: block;
-  margin-bottom: 0.5rem !important;
+  margin-top: 1rem;
+}
+
+#submit_btn{
+  margin-top: 1rem;
 }

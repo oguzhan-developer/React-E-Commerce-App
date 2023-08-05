@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Styles from "./style.module.css";
-import Favorites from "../../../pages/Favorites";
 import { Link } from "react-router-dom";
-import { Button, Dropdown } from "antd";
+import { Button, Dropdown, message } from "antd";
 function MenuComponent({ userName }) {
+
+  const logoutHandle = async() => {
+    localStorage.removeItem("token")
+    await message.success("Çıkış yaptınız.",1)
+    window.location.reload()
+  }
+
   const items = [
     {
       key: "profile",
@@ -15,7 +21,7 @@ function MenuComponent({ userName }) {
     },
     {
       key: "logout",
-      label: <a>Çıkış Yap</a>,
+      label: <a onClick={logoutHandle}>Çıkış Yap</a>,
     },
   ];
 

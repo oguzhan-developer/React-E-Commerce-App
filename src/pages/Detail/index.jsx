@@ -9,33 +9,19 @@ import {
   useDetailProduct,
 } from "../../redux/productSlice";
 import Styles from "./style.module.css";
-import { useState } from "react";
-import RatingSection from "../../Utilities/components/RatingSection";
 import Error404 from "../Error404";
-import Loading from "../../components/Loading";
-import {
-  addFavoriteById,
-  deleteFavoriteById,
-  isFavoritedItem,
-  setFavorite,
-  useIsFavoritedItem,
-} from "../../redux/favoriteSlice";
-import { useUser } from "../../redux/userSlice";
+import { isFavoritedItem } from "../../redux/favoriteSlice";
 import getUIDByToken from "../../utilities/getUIDByToken";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Slider from "./components/Slider";
-import { Divider, Skeleton } from "antd";
+import { Divider } from "antd";
 import Tab from "./components/Tab";
 import Rating from "./components/Rating";
 import Favorite from "./components/Favorite";
 import SkeletonComponent from "./components/Skeleton";
-import SizesAndQuantity from "./components/SizesAndQuantity";
 function Detail() {
-  const [size, setSize] = useState("S");
-  const [fastShipping, setFastShipping] = useState(false);
-  const [alert, setAlert] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(useDetailProduct);
@@ -73,13 +59,13 @@ function Detail() {
               <Rating rating={product.rating} />
               <Favorite product={product} />
             </div>
-              <label id={Styles.price_label}>TL{product.price}</label>
+            <label id={Styles.price_label}>TL{product.price}</label>
             <Tab />
           </div>
         </div>
       </>
-    )
-    else return <SkeletonComponent />
+    );
+  else return <SkeletonComponent />;
 }
 
 export default Detail;

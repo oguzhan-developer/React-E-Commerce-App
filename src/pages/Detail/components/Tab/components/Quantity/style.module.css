@@ -5,11 +5,14 @@
 #div {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
+  margin: 0 1.5rem;
 }
 
 #quantity_label {
-  margin-left: 3rem;
-  margin-right: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  margin-right: 0.4rem;
 }
 
 #quantity_input {

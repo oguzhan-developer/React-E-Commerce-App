@@ -28,16 +28,17 @@ function Navbar() {
       {!user && (
         <div id={Styles.div_auth}>
           <Button
+          id={Styles.login_btn}
             type="primary"
             onClick={() => navigator(`${import.meta.env.VITE_PAGE_REGISTER}`)}
           >
-            Register
+            Kayıt ol
           </Button>
           <Button
             type="primary"
             onClick={() => navigator(`${import.meta.env.VITE_PAGE_LOGIN}`)}
           >
-            Login
+            Giriş Yap
           </Button>
         </div>
       )}

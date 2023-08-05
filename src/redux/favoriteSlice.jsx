@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import {
+  notLoginFavorite,
   succesAddFavorite,
   succesRemoveFavorite,
 } from "../pages/Detail/components/Favorite";
@@ -16,8 +17,6 @@ const DB_USER = import.meta.env.VITE_DB_USER;
 export const addFavoriteById = createAsyncThunk(
   "addFavoriteById",
   async ({ uid, product }) => {
-    console.log(uid);
-    if (!uid) return;
     const userRef = doc(db, DB_USER, uid);
     await updateDoc(userRef, {
       favorites: arrayUnion(product),
@@ -27,7 +26,6 @@ export const addFavoriteById = createAsyncThunk(
 export const deleteFavoriteById = createAsyncThunk(
   "deleteFavoriteById",
   async ({ uid, product }) => {
-    if (!uid) return;
     const userRef = doc(db, DB_USER, uid);
     await updateDoc(userRef, {
       favorites: arrayRemove(product),
@@ -38,7 +36,6 @@ export const deleteFavoriteById = createAsyncThunk(
 export const isFavoritedItem = createAsyncThunk(
   "isFavoritedItem",
   async ({ uid, productId }) => {
-    if (!uid) return false;
     const docRef = doc(db, DB_USER, uid);
     const favoritedItemsDoc = await getDoc(docRef);
     let isFavorited = false;
@@ -75,6 +72,7 @@ const favoriteSlice = createSlice({
       .addCase(addFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
+        notLoginFavorite()
       })
       .addCase(addFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -94,6 +92,7 @@ const favoriteSlice = createSlice({
       .addCase(deleteFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
+        notLoginFavorite()
       })
       .addCase(deleteFavoriteById.pending, (state, action) => {
         state.isLoading = true;

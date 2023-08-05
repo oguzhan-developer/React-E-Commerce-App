@@ -13,14 +13,10 @@ function Login() {
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
 
-  const enterLoading = async() => {
+  const handleBtn = async () => {
     setLoading(true);
     await dispatch(loginUser(form));
-    setLoading(false)
-  };
-
-  const handleBtn = () => {
-
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -35,12 +31,7 @@ function Login() {
 
   return (
     <div id={Styles.login}>
-      <Form
-        id={Styles.form}
-        name="basic"
-        initialValues={{}}
-        autoComplete="off"
-      >
+      <Form id={Styles.form} name="basic" initialValues={{}} autoComplete="off">
         <Form.Item
           label="E-Posta"
           name="email"
@@ -52,7 +43,12 @@ function Login() {
             },
           ]}
         >
-          <Input name="email" value={form.email} onChange={handleChange} className={Styles.input} />
+          <Input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={Styles.input}
+          />
         </Form.Item>
         <br />
         <Form.Item
@@ -65,15 +61,19 @@ function Login() {
             },
           ]}
         >
-          <Input.Password name="password" value={form.password} onChange={handleChange}  className={Styles.input} />
+          <Input.Password
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            className={Styles.input}
+          />
         </Form.Item>
         <Form.Item>
           <Button
-          id={Styles.button}
+            id={Styles.button}
             type="primary"
-            icon={<PoweroffOutlined />}
             loading={loading}
-            onClick={() => enterLoading()}
+            onClick={() => handleBtn()}
           >
             Giriş Yap
           </Button>

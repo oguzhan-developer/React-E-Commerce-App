@@ -1,10 +1,12 @@
 import React from "react";
 import Styles from "./style.module.css";
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import { SlBasket } from "react-icons/sl";
 import { CgDetailsMore } from "react-icons/cg";
 import { TbTruckDelivery } from "react-icons/tb";
-import SizesAndQuantity from "../SizesAndQuantity";
+import Quantity from "./components/Quantity";
+import ShippingSwitch from "./components/ShippingSwitch";
+import Sizes from "./components/Sizes";
 function Tab() {
   const items = [
     {
@@ -16,8 +18,20 @@ function Tab() {
       ),
       children: (
         <>
-          <div id={Styles.div_sizes}>
-            <SizesAndQuantity />
+          <div id={Styles.sizes_and_switch_div}>
+            <Sizes />
+            <ShippingSwitch />
+          </div>
+          <div id={Styles.quantity_and_btn_div}>
+            <Quantity />
+            <Button
+              id={Styles.buy_btn}
+              type="primary"
+              size="large"
+              shape="round"
+            >
+              Sepete Ekle
+            </Button>
           </div>
         </>
       ),
