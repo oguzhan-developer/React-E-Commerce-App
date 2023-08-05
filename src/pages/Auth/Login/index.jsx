@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Styles from "./style.module.css";
-import InputField from "../../../Utilities/components/InputField";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/userSlice";
-import { Button, Checkbox, Form, Input, Modal } from "antd";
-import { PoweroffOutlined } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
 
 const defaultForm = { email: "", password: "" };
 
