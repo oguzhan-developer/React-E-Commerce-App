@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,6 +7,7 @@ import { auth, db } from "../firebase";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import getUIDByToken from "../utilities/getUIDByToken";
 import { succesRegister } from "../pages/Auth/Register";
+import { succesLogin } from "../pages/Auth/Login";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const registerUser = createAsyncThunk(
@@ -19,7 +20,7 @@ export const registerUser = createAsyncThunk(
     ); // Added user to auth.
 
     //then add user to firestore database
-    const user = userCredential.user
+    const user = userCredential.user;
     const uid = user.uid;
 
     await setDoc(doc(db, DB_USER, uid), {
@@ -27,7 +28,7 @@ export const registerUser = createAsyncThunk(
       name,
       email,
       password,
-      favorites:[]
+      favorites: [],
     });
 
     return { accessToken: user.accessToken, uid, name, email };
@@ -47,32 +48,13 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getUserByID = createAsyncThunk(
-  "getUserByToken",
-  async () => {
-    const userId = getUIDByToken()
-    const querySnapshot = await getDocs(
-      collection(db, import.meta.env.VITE_DB_USER)
-    );
-    return { data: querySnapshot, userId };
-  }
-);
-
-
-
-/* import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-
-const washingtonRef = doc(db, "cities", "DC");
-
-// Atomically add a new region to the "regions" array field.
-await updateDoc(washingtonRef, {
-    regions: arrayUnion("greater_virginia")
+export const getUserByID = createAsyncThunk("getUserByToken", async () => {
+  const userId = getUIDByToken();
+  const querySnapshot = await getDocs(
+    collection(db, import.meta.env.VITE_DB_USER)
+  );
+  return { data: querySnapshot, userId };
 });
-
-// Atomically remove a region from the "regions" array field.
-await updateDoc(washingtonRef, {
-    regions: arrayRemove("east_coast")
-}); */
 
 const userSlice = createSlice({
   name: "user",
@@ -115,13 +97,15 @@ const userSlice = createSlice({
         state.register.isLoading = false;
         state.register.error = null;
         localStorage.setItem("token", action.payload.accessToken);
-        const uid = action.payload.uid
-        const name= action.payload.name
-        const email= action.payload.email
+        const uid = action.payload.uid;
+        const name = action.payload.name;
+        const email = action.payload.email;
         state.user = {
-          uid,name,email
+          uid,
+          name,
+          email,
         };
-        succesRegister(name)
+        succesRegister(name);
       })
 
       .addCase(loginUser.pending, (state) => {
@@ -135,7 +119,8 @@ const userSlice = createSlice({
         state.login.isLoading = false;
         state.login.error = null;
         localStorage.setItem("token", action.payload.accessToken);
-        window.location.href = "/"
+        succesLogin();
+        setTimeout(() => (window.location.href = "/"), 1000);
       })
 
       .addCase(getUserByID.pending, (state) => {
@@ -157,8 +142,7 @@ const userSlice = createSlice({
         });
         state.getUser.isLoading = false;
         state.getUser.error = null;
-      })
-
+      });
   },
 });
 export const useUser = (state) => state.user.user;
