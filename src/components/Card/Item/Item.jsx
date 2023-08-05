@@ -24,7 +24,6 @@ function Item({ product }) {
           {product.price}
         </strong>
       </label>
-      <RatingSection product={product} size={"small"} />
       {/* <Button className={Styles.button} variant="contained">
         add to basket
       </Button> */}
