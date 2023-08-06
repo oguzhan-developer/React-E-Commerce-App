@@ -5,14 +5,14 @@ import { useSelector } from "react-redux";
 import { useUser } from "../../redux/userSlice";
 import MenuComponent from "./Menu";
 import { Button } from "antd";
-import { HeartOutlined, StarTwoTone } from "@ant-design/icons";
+import { RiHeartFill } from "react-icons/ri";
 function Navbar() {
   const navigator = useNavigate();
   const user = useSelector(useUser);
 
   const handleFavorite = () => {
-    navigator(import.meta.env.VITE_DB_FAVORITE)
-  }
+    navigator(import.meta.env.VITE_DB_FAVORITE);
+  };
 
   const basketIcon = () => {
     return null;
@@ -32,7 +32,7 @@ function Navbar() {
       {!user && (
         <div id={Styles.div_auth}>
           <Button
-          id={Styles.login_btn}
+            id={Styles.login_btn}
             type="primary"
             onClick={() => navigator(`${import.meta.env.VITE_PAGE_REGISTER}`)}
           >
@@ -49,9 +49,17 @@ function Navbar() {
       {user && (
         <div id={Styles.user_menu}>
           {basketIcon()}
-          <div style={{display:"flex"}}>
-            <Button onClick={handleFavorite} type="text" id={Styles.favorite}>
-              <HeartOutlined id={Styles.favorite_icon} />
+          <div style={{ display: "flex" }}>
+            <Button
+              danger
+              onClick={handleFavorite}
+              type="link"
+              color="#FFF"
+              id={Styles.favorite}
+            >
+              <div className={Styles.icon_div}>
+                <RiHeartFill id={Styles.favorite_icon} />
+              </div>
               <label id={Styles.favorite_label}>Favorilerim</label>
             </Button>
           </div>

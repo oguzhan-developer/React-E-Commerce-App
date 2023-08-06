@@ -4,6 +4,8 @@ import StylesSizes from "./Sizes/style.module.css";
 import { Button, Card, Divider, List } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavoriteById, getFavoritesById, useFavorites } from "../../redux/favoriteSlice";
+import { IoIosClose } from "react-icons/io";
+
 import getUID from "../../utilities/getUID";
 import Sizes from "./Sizes";
 function Favorites() {
@@ -27,7 +29,7 @@ function Favorites() {
           <div key={key} className={Styles.div}>
             <div className={Styles.delete_div}>
                 <Button className={Styles.delete_btn} onClick={() => handleDelete(item)} shape="circle">
-                  X
+                <IoIosClose className={Styles.delete_icon} size={30} />
                 </Button>
             </div>
             <img className={Styles.img} src={item.images[0]} />

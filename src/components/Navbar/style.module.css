@@ -74,3 +74,9 @@
   display: inline-block;
   height: 1.5rem;
 }
+
+.icon_div{
+  height: 1.2rem;
+  width: 1.5rem;
+  display: inline;
+}
