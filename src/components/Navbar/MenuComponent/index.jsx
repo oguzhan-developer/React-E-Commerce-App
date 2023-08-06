@@ -61,7 +61,6 @@ function MenuComponent({ userName }) {
           id={Styles.button}
           type="link"
           color="black"
-          style={{ width: "6rem" }}
         >
           <div id={Styles.icon_div}>
             <RiAccountCircleLine className={Styles.icon} />

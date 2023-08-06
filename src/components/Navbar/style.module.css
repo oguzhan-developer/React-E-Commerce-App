@@ -4,17 +4,30 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid thistle;
   background: #fcfaf6;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   color: brown;
   z-index: 10;
   height: 3.8rem;
   margin: 0;
-  padding: 0 14rem;
+  padding: 0 1rem;
   top: 0;
-  padding-left: 1rem;
   position: sticky;
+}
+
+#right_div{
+  display: flex;
+  align-items: center;
+}
+
+#basket_div{
+  margin-left: 2rem;
+}
+#basket_icon{
+  opacity: 1;
+}
+#basket_icon:hover{
+  opacity: 0.7;
 }
 
 #shop_name {
@@ -42,7 +55,7 @@
 }
 
 #user_menu {
-  width: 8rem;
+  width: 18rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

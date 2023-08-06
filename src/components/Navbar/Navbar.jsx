@@ -1,34 +1,21 @@
 import React from "react";
 import Styles from "./style.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useUser } from "../../redux/userSlice";
-import MenuComponent from "./Menu";
-import { Button } from "antd";
-import { RiHeartFill } from "react-icons/ri";
+import MenuComponent from "./MenuComponent";
+import { Badge, Button } from "antd";
+import { RiHeartFill, RiShoppingBasket2Line } from "react-icons/ri";
+import MenuButton from "./MenuComponent/MenuButton";
 function Navbar() {
   const navigator = useNavigate();
   const user = useSelector(useUser);
-
-  const handleFavorite = () => {
-    navigator(import.meta.env.VITE_DB_FAVORITE);
-  };
-
-  const basketIcon = () => {
-    return null;
-    /*  <SvgIcon
-        className={Styles.icon}
-        component={ShoppingBasketRoundedIcon}
-        color="disabled"
-      /> */
-  };
 
   return (
     <div id={Styles.navbar}>
       <h2 id={Styles.shop_name} onClick={() => navigator("/")}>
         {import.meta.env.VITE_SITE_NAME}
       </h2>
-
       {!user && (
         <div id={Styles.div_auth}>
           <Button
@@ -47,23 +34,23 @@ function Navbar() {
         </div>
       )}
       {user && (
-        <div id={Styles.user_menu}>
-          {basketIcon()}
-          <div style={{ display: "flex" }}>
-            <Button
-              danger
-              onClick={handleFavorite}
-              type="link"
-              color="#FFF"
-              id={Styles.favorite}
-            >
-              <div className={Styles.icon_div}>
-                <RiHeartFill id={Styles.favorite_icon} />
-              </div>
-              <label id={Styles.favorite_label}>Favorilerim</label>
-            </Button>
+        <div id={Styles.right_div}>
+          <div id={Styles.user_menu}>
+            <MenuButton
+              danger={true}
+              label={"Favorilerim"}
+              icon={<RiHeartFill id={Styles.favorite_icon} />}
+              onClick={() => navigator(import.meta.env.VITE_PAGE_FAVORITE)}
+            />
+            <MenuComponent userName={user.name} id={Styles.menu} />
           </div>
-          <MenuComponent userName={user.name} />
+          <div id={Styles.basket_div}>
+            <Link to={import.meta.env.VITE_PAGE_BASKET}>
+          <Badge size="small" color="magenta" count={1}>
+            <RiShoppingBasket2Line id={Styles.basket_icon} size={25} />
+            </Badge >
+            </Link>
+          </div>
         </div>
       )}
     </div>

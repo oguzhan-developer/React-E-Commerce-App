@@ -1,0 +1,25 @@
+.div {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+}
+
+.label {
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  font-size: medium;
+  display: inline-block;
+  height: 1.5rem;
+}
+
+.icon_div {
+  height: 1.2rem;
+  width: 1.5rem;
+  display: inline;
+}
