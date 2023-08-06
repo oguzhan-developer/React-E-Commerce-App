@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import Styles from "./style.module.css";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/userSlice";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
 
 const defaultForm = { email: "", password: "" };
-
-export const succesLogin = () => {
-  message.success("Tekrar hoşgeldin.")
-}
 
 function Login() {
   const dispatch = useDispatch();

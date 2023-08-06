@@ -8,10 +8,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import {
-  notLoginFavorite,
-  succesAddFavorite,
-  succesRemoveFavorite,
-} from "../pages/Detail/components/Favorite";
+  alertNotLoginFavorite,
+  alertSuccesAddFavorite,
+  alertSuccesRemoveFavorite,
+} from "../utilities/Alerts";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const addFavoriteById = createAsyncThunk(
@@ -40,7 +40,7 @@ export const getFavoritesById = createAsyncThunk(
     const favoritedItemsDoc = await getDoc(docRef);
     if (favoritedItemsDoc.exists()) {
       const favoritedItems = favoritedItemsDoc.data().favorites;
-      return favoritedItems
+      return favoritedItems;
     }
   }
 );
@@ -85,13 +85,13 @@ const favoriteSlice = createSlice({
       .addCase(addFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
-        notLoginFavorite();
+        alertNotLoginFavorite();
       })
       .addCase(addFavoriteById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.isFavoritedItem = !state.isFavoritedItem;
-        succesAddFavorite();
+        alertSuccesAddFavorite();
       })
 
       .addCase(isFavoritedItem.fulfilled, (state, action) => {
@@ -105,7 +105,7 @@ const favoriteSlice = createSlice({
       .addCase(deleteFavoriteById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = `${action.error.name} ${action.error.message}`;
-        notLoginFavorite();
+        alertNotLoginFavorite();
       })
       .addCase(deleteFavoriteById.pending, (state, action) => {
         state.isLoading = true;
@@ -115,15 +115,15 @@ const favoriteSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.isFavoritedItem = !state.isFavoritedItem;
-        succesRemoveFavorite();
+        alertSuccesRemoveFavorite();
       })
 
       .addCase(getFavoritesById.fulfilled, (state, action) => {
-        state.favorites = action.payload
-      })
+        state.favorites = action.payload;
+      });
   },
 });
 export const { setFavorite } = favoriteSlice.actions;
 export const useIsFavoritedItem = (state) => state.favorite.isFavoritedItem;
-export const useFavorites = state => state.favorite.favorites
+export const useFavorites = (state) => state.favorite.favorites;
 export default favoriteSlice.reducer;

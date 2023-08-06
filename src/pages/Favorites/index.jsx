@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
 import Styles from "./style.module.css";
-import { Card, Divider, List } from "antd";
+import StylesSizes from "./Sizes/style.module.css";
+import { Button, Card, Divider, List } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getFavoritesById, useFavorites } from "../../redux/favoriteSlice";
+import { deleteFavoriteById, getFavoritesById, useFavorites } from "../../redux/favoriteSlice";
 import getUID from "../../utilities/getUID";
-import Rating from "../Detail/components/Rating/index"
+import Sizes from "./Sizes";
 function Favorites() {
   const dispatch = useDispatch();
   const uid = getUID();
   const favorites = useSelector(useFavorites);
+
+
+  const handleDelete = (product) => {
+    dispatch(deleteFavoriteById({uid, product}))
+  }
 
   useEffect(() => {
     dispatch(getFavoritesById({ uid }));
@@ -16,19 +22,26 @@ function Favorites() {
 
   return (
     <div id={Styles.favorites}>
-      {favorites.map((item) => {
+      {favorites.map((item, key) => {
         return (
-          <Card style={{paddingBottom:0}} className={Styles.card}>
-            <div className={Styles.div}>
-            <label className={Styles.title}>{item.title}</label>
-            <Divider className={Styles.divider} />
-            <img className={Styles.img} src={item.images[0]} />
+          <div key={key} className={Styles.div}>
+            <div className={Styles.delete_div}>
+                <Button className={Styles.delete_btn} onClick={() => handleDelete(item)} shape="circle">
+                  X
+                </Button>
             </div>
-          </Card>
-        )
+            <img className={Styles.img} src={item.images[0]} />
+            <Divider className={Styles.divider} />
+            <label className={Styles.title}>{item.title}</label>
+            <div className={`${Styles.buy_div} ${StylesSizes.buy_div}`}>
+              <Sizes />
+              <Button>Sepete ekle</Button>
+            </div>
+          </div>
+        );
       })}
     </div>
-  )
+  );
 }
 
 export default Favorites;

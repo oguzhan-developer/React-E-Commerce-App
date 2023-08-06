@@ -4,12 +4,12 @@
   display: flex;
   flex-wrap: wrap;
 }
-.divider{
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+.divider {
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 .card {
-  width: 30%;
+  width: 15%;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -19,17 +19,53 @@
   padding-bottom: 0 !important;
 }
 
-.div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 0 !important;
+.div {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0 !important;
+  background: #f1f1f1;
+  margin: 1rem;
+  border-radius: 8px;
+  position: relative;
 }
+
+.div:hover {
+  .buy_div {
+    opacity: 1;
+  }
+
+}
+
 .img {
-  width: 25rem;
+  width: 14.3rem;
+  height: 13.5rem;
+  border-radius: 8px;
 }
 
 .title {
   font-weight: 600;
-  font-size: 1.1rem;
+  width: 14rem;
+  font-size: 0.9rem;
+  text-wrap: wrap;
+  text-align: center;
+  padding: 0.2rem;
+  height: 2rem;
+}
+
+.buy_div {
+  opacity: 0;
+  margin: 0.5rem;
+}
+.delete_div {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+}
+
+.delete_btn {
+  color: gray;
 }

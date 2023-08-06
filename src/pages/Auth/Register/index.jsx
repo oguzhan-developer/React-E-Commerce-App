@@ -3,13 +3,9 @@ import Styles from "./style.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../redux/userSlice";
-import { Button, Card, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
 
 const defaultForm = { name: "", email: "", password: "" };
-
-export const succesRegister = (name) => {
-  message.success(`Hoşgeldin ${name}`);
-};
 
 function Register() {
   const [loading, setLoading] = useState(false);

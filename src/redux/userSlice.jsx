@@ -6,8 +6,7 @@ import {
 import { auth, db } from "../firebase";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import getUID from "../utilities/getUID";
-import { succesRegister } from "../pages/Auth/Register";
-import { succesLogin } from "../pages/Auth/Login";
+import { alertSuccesLogin, alertSuccesRegister } from "../utilities/Alerts";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const registerUser = createAsyncThunk(
@@ -105,7 +104,7 @@ const userSlice = createSlice({
           name,
           email,
         };
-        succesRegister(name);
+        alertSuccesRegister(name);
       })
 
       .addCase(loginUser.pending, (state) => {
@@ -119,7 +118,7 @@ const userSlice = createSlice({
         state.login.isLoading = false;
         state.login.error = null;
         localStorage.setItem("token", action.payload.accessToken);
-        succesLogin();
+        alertSuccesLogin();
         setTimeout(() => (window.location.href = "/"), 1000);
       })
 
