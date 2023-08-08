@@ -60,7 +60,7 @@ function Detail() {
               <Favorite product={product} />
             </div>
             <label id={Styles.price_label}>TL{product.price}</label>
-            <Tab />
+            <Tab product={product} />
           </div>
         </div>
       </>

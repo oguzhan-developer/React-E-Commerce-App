@@ -9,6 +9,17 @@ import getUID from "../utilities/getUID";
 import { alertSuccesLogin, alertSuccesRegister } from "../utilities/Alerts";
 const DB_USER = import.meta.env.VITE_DB_USER;
 
+const defaultUserStructure = (uid, name, email, password) => {
+  return {
+    uid,
+    name,
+    email,
+    password,
+    favorites: [],
+    basket: [],
+  };
+};
+
 export const registerUser = createAsyncThunk(
   "registerUser",
   async ({ name, email, password }) => {
@@ -22,13 +33,7 @@ export const registerUser = createAsyncThunk(
     const user = userCredential.user;
     const uid = user.uid;
 
-    await setDoc(doc(db, DB_USER, uid), {
-      uid,
-      name,
-      email,
-      password,
-      favorites: [],
-    });
+    await setDoc(doc(db, DB_USER, uid), defaultUserStructure(uid,name,email,password));
 
     return { accessToken: user.accessToken, uid, name, email };
   }
