@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "../../components/Card";
+import Card from "../../components/Home/Card";
 import Styles from "./style.module.css";
 import { nextPage, useIsLastPage, useIsLoading } from "../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Home/Loading";
 
 function Home() {
   const dispatch = useDispatch();

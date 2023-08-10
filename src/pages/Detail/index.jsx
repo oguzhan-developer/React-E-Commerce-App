@@ -35,6 +35,7 @@ function Detail() {
     dispatch(isFavoritedItem({ uid, productId: id }));
   }, []);
 
+
   const isProductExist = () => {
     if (!loading && product && Object.keys(product).length > 0) {
       return true;

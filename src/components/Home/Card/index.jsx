@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useProducts } from "../../redux/productSlice";
+import { useProducts } from "../../../redux/productSlice";
 import Item from "./Item/Item";
 import Styles from "./style.module.css";
 

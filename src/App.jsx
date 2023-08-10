@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Home/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsFromDB, usePage } from "./redux/productSlice";
 import { useEffect } from "react";
@@ -13,14 +13,13 @@ import Error404 from "./pages/Error404";
 import Favorites from "./pages/Favorites";
 import ProtectedRoute from "./ProtectedRoute";
 import { Button } from "antd";
+import { getBasket } from "./redux/basketSlice";
+import getUID from "./utilities/getUID";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
   const page = useSelector(usePage);
-
-  useEffect(() => {
-    init();
-  }, [page]);
+  const uid = getUID()
 
   useEffect(() => {
     let userToken = localStorage.getItem("token");
@@ -33,7 +32,10 @@ function App() {
 
   const init = () => {
     dispatch(getProductsFromDB(page));
+     dispatch(getBasket({uid}))
   };
+
+  init()
 
   return (
     <div id="App">

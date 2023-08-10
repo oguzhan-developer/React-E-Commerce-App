@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "./style.module.css";
 import { Button, Tabs } from "antd";
 import { SlBasket } from "react-icons/sl";
@@ -7,19 +7,39 @@ import { TbTruckDelivery } from "react-icons/tb";
 import Quantity from "./components/Quantity";
 import ShippingSwitch from "./components/ShippingSwitch";
 import Sizes from "./components/Sizes";
-import { useDispatch } from "react-redux";
-import { addBasket } from "../../../../redux/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addBasket, useBasketItems } from "../../../../redux/basketSlice";
 import getUID from "../../../../utilities/getUID";
+import { useNavigate } from "react-router-dom";
+
+const isProductInTheBasket = async (productID, basketItems) => {
+  const filteredItems =  await basketItems.filter((item) => {
+    return item.id == parseInt(productID);
+  });
+  if (filteredItems.length > 0) return true;
+  else return false;
+};
 
 function Tab({ product }) {
+  const [isProductBasket, setIsProductBasket] = useState(false)
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const uid = getUID();
+  const basketItems = useSelector(useBasketItems);
+  const navigator = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      setIsProductBasket(await isProductInTheBasket(product.id, basketItems))
+    })()
+  })
 
   const basketHandle = async () => {
-    setLoading(true);
-    await dispatch(addBasket({ uid, product }));
-    setLoading(false);
+    if (!isProductBasket) {
+      setLoading(true);
+      await dispatch(addBasket({ uid, product }));
+      setLoading(false);
+    } else navigator(import.meta.env.VITE_PAGE_BASKET);
   };
 
   const items = [
@@ -46,7 +66,8 @@ function Tab({ product }) {
               size="large"
               shape="round"
             >
-              Sepete Ekle
+              {isProductBasket && "Sepete Git"}
+              {!isProductBasket && "Sepete Ekle"}
             </Button>
           </div>
         </>

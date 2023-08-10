@@ -2,23 +2,19 @@ import React, { useState } from "react";
 import Styles from "./style.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useUser } from "../../redux/userSlice";
+import { useUser } from "../../../redux/userSlice";
 import MenuComponent from "./MenuComponent";
 import { Badge, Button } from "antd";
 import { RiHeartFill, RiShoppingBasket2Line } from "react-icons/ri";
 import MenuButton from "./MenuComponent/MenuButton";
-import { getBasketLength, useBasketLength } from "../../redux/basketSlice";
-import getUID from "../../utilities/getUID";
+import { useBasketLength } from "../../../redux/basketSlice";
 
 function Navbar() {
   const navigator = useNavigate();
   const user = useSelector(useUser);
-  const uid = getUID();
   const dispatch = useDispatch();
   const basketLength = useSelector(useBasketLength);
-
   useState(() => {
-    dispatch(getBasketLength({ uid }));
   }, [dispatch]);
 
   return (
@@ -57,11 +53,11 @@ function Navbar() {
           <div id={Styles.basket_div}>
             <Link to={import.meta.env.VITE_PAGE_BASKET}>
               {basketLength && (
-                <Badge size="small" color="magenta" count={basketLength}>
+                <Badge size="small" color="magenta" count={parseInt(basketLength)}>
                   <RiShoppingBasket2Line id={Styles.basket_icon} size={25} />
                 </Badge>
               )}
-              {!basketLength && (
+              {parseInt(basketLength) == 0 && (
                 <RiShoppingBasket2Line id={Styles.basket_icon} size={25} />
               )}
             </Link>
