@@ -14,12 +14,12 @@ import { isFavoritedItem } from "../../redux/favoriteSlice";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Slider from "./components/Slider";
 import { Divider } from "antd";
-import Tab from "./components/Tab";
-import Rating from "./components/Rating";
-import Favorite from "./components/Favorite";
-import SkeletonComponent from "./components/Skeleton";
+import Tab from "../../components/Detail/Tab"
+import Slider from "../../components/Detail/Slider"
+import Rating from "../../components/Detail/Rating"
+import Favorite from "../../components/Detail/Favorite"
+import SkeletonComponent from "../../components/Detail/Skeleton"
 import getUID from "../../utilities/getUID";
 function Detail() {
   const { id } = useParams();
@@ -50,7 +50,7 @@ function Detail() {
       <>
         <div id={Styles.item}>
           <div id={Styles.div_image}>
-            <Slider images={product.images} />
+            <Slider images={product.images} />{ /*antd den aldi */}
           </div>
           <div id={Styles.div_detail}>
             <Divider plain id={Styles.product_title_divider}>

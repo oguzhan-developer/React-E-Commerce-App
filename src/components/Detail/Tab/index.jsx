@@ -4,12 +4,12 @@ import { Button, Tabs } from "antd";
 import { SlBasket } from "react-icons/sl";
 import { CgDetailsMore } from "react-icons/cg";
 import { TbTruckDelivery } from "react-icons/tb";
-import Quantity from "./components/Quantity";
-import ShippingSwitch from "./components/ShippingSwitch";
-import Sizes from "./components/Sizes";
+import Quantity from "./Quantity";
+import ShippingSwitch from "./ShippingSwitch";
+import Sizes from "./Sizes";
 import { useDispatch, useSelector } from "react-redux";
-import { addBasket, useBasketItems } from "../../../../redux/basketSlice";
-import getUID from "../../../../utilities/getUID";
+import { addBasket, useBasketItems } from "../../../redux/basketSlice"
+import getUID from "../../../utilities/getUID";
 import { useNavigate } from "react-router-dom";
 
 const isProductInTheBasket = async (productID, basketItems) => {

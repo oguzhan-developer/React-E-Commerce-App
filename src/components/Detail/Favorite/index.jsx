@@ -4,8 +4,8 @@ import {
   addFavoriteById,
   deleteFavoriteById,
   useIsFavoritedItem,
-} from "../../../../redux/favoriteSlice";
-import getUID from "../../../../utilities/getUID";
+} from "../../../redux/favoriteSlice";
+import getUID from "../../../utilities/getUID";
 import { MdFavoriteBorder } from "@react-icons/all-files/md/MdFavoriteBorder";
 import { MdFavorite } from "@react-icons/all-files/md/MdFavorite";
 import Styles from "./style.module.css";
