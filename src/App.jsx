@@ -15,6 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Button } from "antd";
 import { getBasket } from "./redux/basketSlice";
 import getUID from "./utilities/getUID";
+import Basket from "./pages/Basket/index.jsx";
 export const SHOP_NAME = "eCommerce";
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
     } else {
       dispatch(resetUser());
     }
+    init()
   }, []);
 
   const init = () => {
@@ -35,23 +37,23 @@ function App() {
      dispatch(getBasket({uid}))
   };
 
-  init()
 
   return (
     <div id="App">
       <Navbar />
       { <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/giris" element={<Login />} />
-        <Route path="/uyeol" element={<Register />} />
-        <Route path="/favoriler"
+        <Route path={import.meta.env.VITE_PAGE_LOGIN} element={<Login />} />
+        <Route path={import.meta.env.VITE_PAGE_REGISTER} element={<Register />} />
+        <Route path={import.meta.env.VITE_DB_FAVORITE}
           element={
             <ProtectedRoute>
               <Favorites />
             </ProtectedRoute>
           }
         />
-        <Route path="detay/:id" element={<Detail />} />
+        <Route path={import.meta.env.VITE_PAGE_BASKET} element={<Basket/>} />
+        <Route path={`${import.meta.env.VITE_PAGE_DETAIL}/:id`} element={<Detail />} />
         <Route path="*" element={<Error404 message={"Sayfa Bulunamadı."} />} />
       </Routes> }
     </div>

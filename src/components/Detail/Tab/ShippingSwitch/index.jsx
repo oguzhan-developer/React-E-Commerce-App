@@ -3,8 +3,7 @@ import Styles from "./style.module.css";
 import { Checkbox, Switch } from "antd";
 import { LiaShippingFastSolid } from "react-icons/lia";
 
-function ShippingSwitch() {
-  const [fastShipping, setFastShipping] = useState(false);
+function ShippingSwitch({fastShipping, setFastShipping}) {
   return (
     <div id={Styles.div}>
       <Switch onChange={(e) => setFastShipping(e)} />

@@ -13,7 +13,6 @@ function Favorites() {
   const uid = getUID();
   const favorites = useSelector(useFavorites);
 
-
   const handleDelete = (product) => {
     dispatch(deleteFavoriteById({uid, product}))
   }

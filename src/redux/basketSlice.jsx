@@ -7,16 +7,15 @@ const DB_USER = import.meta.env.VITE_DB_USER;
 
 export const addBasket = createAsyncThunk(
   "addBasket",
-  async ({ uid, product }) => {
+  async ({ uid, product,basketItems }) => {
 
-    basketSlice.getInitialState().items
-    const filteredItems =  await basketSlice.getInitialState().items.filter((item) => {
+    const filteredItems =  await basketItems.filter((item) => {
       return item.id == parseInt(product.id);
     });
-    if (filteredItems.length != null )throw "Urun zaten ekli."
+    if (filteredItems.length > 0 )throw new Error('Urun zaten ekli!');
     else {
       const userRef = doc(db, DB_USER, uid);
-  
+
       await updateDoc(userRef, {
         basket: arrayUnion(product),
       });
@@ -49,14 +48,14 @@ const basketSlice = createSlice({
       .addCase(addBasket.fulfilled, (state, action) => {
         state.error = null;
         state.items = [...state.items, action.payload];
-        state.isInTheBasket = true;
+        state.isinthebasket = true;
         state.length += 1;
         alertAddBasketSucces();
       })
       .addCase(addBasket.rejected, (state, action) => {
         state.error = `${action.error.name} ${action.error.message}`;
         alertAddBasketReject()
-        setInterval(()=> window.location.href = import.meta.env.VITE_PAGE_BASKET,900)
+        // setInterval(()=> window.location.href = import.meta.env.VITE_PAGE_BASKET,900)
         
       })
 

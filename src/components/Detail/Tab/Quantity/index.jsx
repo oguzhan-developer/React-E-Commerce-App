@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Styles from "./style.module.css";
 import { Button, Input, Radio } from "antd";
-function Quantity() {
-  const [quantity, setQuantity] = useState(1);
+function Quantity({quantity, setQuantity}) {
   const minValue = 1;
   const maxValue = 99;
   const increaseQuantity = () => {

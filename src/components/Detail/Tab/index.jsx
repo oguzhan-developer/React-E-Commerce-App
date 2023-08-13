@@ -12,33 +12,28 @@ import { addBasket, useBasketItems } from "../../../redux/basketSlice"
 import getUID from "../../../utilities/getUID";
 import { useNavigate } from "react-router-dom";
 
-const isProductInTheBasket = async (productID, basketItems) => {
-  const filteredItems =  await basketItems.filter((item) => {
-    return item.id == parseInt(productID);
-  });
-  if (filteredItems.length > 0) return true;
-  else return false;
-};
 
-function Tab({ product }) {
-  const [isProductBasket, setIsProductBasket] = useState(false)
-  const [loading, setLoading] = useState(false);
+
+function Tab({ product, isProductBasket }) {
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [size, setSize] = useState("M")
+  const [quantity, setQuantity] = useState(1);
+  const [fastShipping, setFastShipping] = useState(false);
+  const basketItems = useSelector(useBasketItems)
   const dispatch = useDispatch();
   const uid = getUID();
-  const basketItems = useSelector(useBasketItems);
   const navigator = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      setIsProductBasket(await isProductInTheBasket(product.id, basketItems))
-    })()
+
   })
 
   const basketHandle = async () => {
     if (!isProductBasket) {
-      setLoading(true);
-      await dispatch(addBasket({ uid, product }));
-      setLoading(false);
+      setBtnLoading(true);
+      const tempProduct = {...product, size, quantity, fastShipping}
+      await dispatch(addBasket({ uid, product: tempProduct , basketItems}));
+      setBtnLoading(false);
     } else navigator(import.meta.env.VITE_PAGE_BASKET);
   };
 
@@ -53,13 +48,13 @@ function Tab({ product }) {
       children: (
         <>
           <div id={Styles.sizes_and_switch_div}>
-            <Sizes />
-            <ShippingSwitch />
+            <Sizes setSize={setSize} />
+            <ShippingSwitch fastShipping={fastShipping} setFastShipping={setFastShipping} />
           </div>
           <div id={Styles.quantity_and_btn_div}>
-            <Quantity />
+            <Quantity quantity={quantity} setQuantity={setQuantity} />
             <Button
-              loading={loading}
+              loading={btnLoading}
               onClick={basketHandle}
               id={Styles.buy_btn}
               type="primary"
@@ -92,7 +87,9 @@ function Tab({ product }) {
       children: `Content of Tab Pane 3`,
     },
   ];
-  return <Tabs id={Styles.tab} defaultActiveKey="1" items={items} />;
+  return (
+       <Tabs id={Styles.tab} defaultActiveKey="1" items={items} />
+)
 }
 
 export default Tab;
